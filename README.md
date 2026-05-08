@@ -1,32 +1,70 @@
 # Node.js Interview Preparation  
-## Chunk 1 — Questions 1 to 20
-
 ---
 
 # 📚 Table of Contents
 
 | No. | Question |
 |---|---|
-| 1 | What is Node.js? Why is it used? |
-| 2 | Explain the event-driven architecture in Node.js |
-| 3 | What is the event loop and how does it work? |
-| 4 | What are microtasks and macrotasks in Node.js? |
-| 5 | Difference between process.nextTick(), setImmediate(), and setTimeout() |
-| 6 | How does Node.js handle asynchronous operations? |
-| 7 | What is the difference between blocking and non-blocking code? |
-| 8 | What are streams in Node.js? Types of streams? |
-| 9 | How does Node.js handle child processes? |
-| 10 | What is the purpose of the cluster module? |
-| 11 | Difference between CommonJS and ES Modules |
-| 12 | How do you create and export a custom module? |
-| 13 | What is package.json and important fields? |
-| 14 | Difference between dependencies and devDependencies |
-| 15 | How do you handle environment variables in Node.js? |
-| 16 | Difference between callbacks, promises, and async/await |
-| 17 | How do you handle errors in async functions? |
-| 18 | Difference between Promise.all() and Promise.race() |
-| 19 | What happens if you forget await in an async function? |
-| 20 | Explain libuv in Node.js |
+| 1 | [What is Node.js? Why is it used?](#1-what-is-nodejs-why-is-it-used) |
+| 2 | [Explain the event-driven architecture in Node.js](#2-explain-the-event-driven-architecture-in-nodejs) |
+| 3 | [What is the event loop and how does it work?](#3-what-is-the-event-loop-and-how-does-it-work) |
+| 4 | [What are microtasks and macrotasks in Node.js?](#4-what-are-microtasks-and-macrotasks-in-nodejs) |
+| 5 | [Difference between processnexttick setImmediate and setTimeout](#5-difference-between-processnexttick-setimmediate-and-settimeout) |
+| 6 | [How does Node.js handle asynchronous operations?](#6-how-does-nodejs-handle-asynchronous-operations) |
+| 7 | [Difference between blocking and non-blocking code](#7-difference-between-blocking-and-non-blocking-code) |
+| 8 | [What are streams in Node.js?](#8-what-are-streams-in-nodejs-types) |
+| 9 | [How does Node.js handle child processes?](#9-how-does-nodejs-handle-child-processes) |
+| 10 | [Purpose of cluster module](#10-what-is-the-purpose-of-the-cluster-module) |
+| 11 | [CommonJS vs ES Modules](#11-difference-between-commonjs-and-es-modules) |
+| 12 | [Create and export custom modules](#12-how-do-you-create-and-export-a-custom-module) |
+| 13 | [What is package.json?](#13-what-is-packagejson-and-important-fields) |
+| 14 | [dependencies vs devDependencies](#14-difference-between-dependencies-and-devdependencies) |
+| 15 | [Environment variables](#15-how-do-you-handle-environment-variables-in-nodejs) |
+| 16 | [Callbacks vs Promises vs Async/Await](#16-difference-between-callbacks-promises-and-asyncawait) |
+| 17 | [Error handling in async functions](#17-how-do-you-handle-errors-in-async-functions) |
+| 18 | [Promise.all vs Promise.race](#18-difference-between-promiseall-and-promiserace) |
+| 19 | [Forgetting await](#19-what-happens-if-you-forget-await-in-an-async-function) |
+| 20 | [Explain libuv](#20-explain-libuv-in-nodejs) |
+| 21 | [What is semantic versioning (semver)?](#21-what-is-semantic-versioning-semver) |
+| 22 | [Difference between npm install and npm ci](#22-difference-between-npm-install-and-npm-ci) |
+| 23 | [What is package-lock.json?](#23-what-is-package-lockjson) |
+| 24 | [How do you handle dependency vulnerabilities?](#24-how-do-you-handle-dependency-vulnerabilities) |
+| 25 | [What are peer dependencies?](#25-what-are-peer-dependencies) |
+| 26 | [How does Promise chaining work?](#26-how-does-promise-chaining-work) |
+| 27 | [What is util.promisify()?](#27-what-is-utilpromisify) |
+| 28 | [How do you retry failed async operations?](#28-how-do-you-retry-failed-async-operations) |
+| 29 | [How do you implement timeout for promises?](#29-how-do-you-implement-timeout-for-promises) |
+| 30 | [What is backpressure in streams?](#30-what-is-backpressure-in-streams) |
+| 31 | [What are middleware functions in Express?](#31-what-are-middleware-functions-in-express) |
+| 32 | [Difference between app.use() and app.get()](#32-difference-between-appuse-and-appget) |
+| 33 | [How do you handle global errors in Express?](#33-how-do-you-handle-global-errors-in-express) |
+| 34 | [How do you handle 404 routes in Express?](#34-how-do-you-handle-404-routes-in-express) |
+| 35 | [Route params vs query params](#35-route-params-vs-query-params) |
+| 36 | [How do you validate request data?](#36-how-do-you-validate-request-data) |
+| 37 | [How do you secure Express APIs?](#37-how-do-you-secure-express-apis) |
+| 38 | [How do you upload files in Express?](#38-how-do-you-upload-files-in-express) |
+| 39 | [How do you handle request body limits?](#39-how-do-you-handle-request-body-limits) |
+| 40 | [Difference between unit, integration, and E2E tests](#40-difference-between-unit-integration-and-e2e-tests) |
+| 41 | [What testing frameworks have you used in Node.js?](#41-what-testing-frameworks-have-you-used-in-nodejs) |
+| 42 | [How do you write a unit test in Jest?](#42-how-do-you-write-a-unit-test-in-jest) |
+| 43 | [How do you test async code in Jest?](#43-how-do-you-test-async-code-in-jest) |
+| 44 | [What are mocks, stubs, and spies?](#44-what-are-mocks-stubs-and-spies) |
+| 45 | [How do you mock external APIs in tests?](#45-how-do-you-mock-external-apis-in-tests) |
+| 46 | [How do you test Express routes?](#46-how-do-you-test-express-routes) |
+| 47 | [What is Supertest?](#47-what-is-supertest) |
+| 48 | [How do you run specific Jest tests?](#48-how-do-you-run-specific-jest-tests) |
+| 49 | [How do you measure test coverage?](#49-how-do-you-measure-test-coverage) |
+| 50 | [What is snapshot testing?](#50-what-is-snapshot-testing) |
+| 51 | [How do you debug Node.js applications?](#51-how-do-you-debug-nodejs-applications) |
+| 52 | [What are memory leaks in Node.js?](#52-what-are-memory-leaks-in-nodejs) |
+| 53 | [How do you profile CPU usage?](#53-how-do-you-profile-cpu-usage) |
+| 54 | [How do you improve Node.js performance?](#54-how-do-you-improve-nodejs-performance) |
+| 55 | [What tools are used for API debugging?](#55-what-tools-are-used-for-api-debugging) |
+| 56 | [How do you connect Node.js with PostgreSQL?](#56-how-do-you-connect-nodejs-with-postgresql) |
+| 57 | [What are connection pools?](#57-what-are-connection-pools) |
+| 58 | [How do you prevent SQL injection?](#58-how-do-you-prevent-sql-injection) |
+| 59 | [How do you test database queries?](#59-how-do-you-test-database-queries) |
+| 60 | [What are in-memory databases in testing?](#60-what-are-in-memory-databases-in-testing) |
 
 ---
 
@@ -75,6 +113,10 @@ http.createServer((req, res) => {
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 2. Explain the event-driven architecture in Node.js
 
 ## Answer
@@ -116,6 +158,10 @@ emitter.emit("login", "Ashish");
 ```txt
 Ashish logged in
 ```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
 
 ---
 
@@ -168,6 +214,15 @@ End
 Promise
 Timeout
 ```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+---
+
+[⬆ Back to Top](#-table-of-contents)
 
 ---
 
@@ -235,6 +290,10 @@ timeout
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 5. Difference between process.nextTick(), setImmediate(), and setTimeout()
 
 ## Answer
@@ -266,6 +325,10 @@ nextTick
 immediate
 timeout
 ```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
 
 ---
 
@@ -318,6 +381,10 @@ Reading...
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 7. Difference between blocking and non-blocking code
 
 ## Blocking Code
@@ -352,6 +419,10 @@ console.log("Continue...");
 | Synchronous | Asynchronous |
 | Slower scalability | Better scalability |
 | Waits for task | Continues execution |
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
 
 ---
 
@@ -393,6 +464,10 @@ readStream.on("data", chunk => {
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 9. How does Node.js handle child processes?
 
 ## Answer
@@ -426,6 +501,10 @@ exec("node -v", (err, stdout) => {
   console.log(stdout);
 });
 ```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
 
 ---
 
@@ -464,6 +543,10 @@ if (cluster.isMaster) {
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 11. Difference between CommonJS and ES Modules
 
 | Feature | CommonJS | ES Modules |
@@ -491,6 +574,10 @@ import math from "./math.js";
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 12. How do you create and export a custom module?
 
 ## math.js
@@ -512,6 +599,10 @@ const add = require("./math");
 
 console.log(add(2, 3));
 ```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
 
 ---
 
@@ -551,6 +642,10 @@ console.log(add(2, 3));
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 14. Difference between dependencies and devDependencies
 
 | dependencies | devDependencies |
@@ -574,6 +669,10 @@ npm install express
 ```bash
 npm install jest --save-dev
 ```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
 
 ---
 
@@ -619,6 +718,10 @@ console.log(process.env.PORT);
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 16. Difference between callbacks, promises, and async/await
 
 | Type | Description |
@@ -658,6 +761,10 @@ async function getData() {
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 17. How do you handle errors in async functions?
 
 ## Using try/catch
@@ -689,6 +796,10 @@ app.get("/", async (req, res, next) => {
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 18. Difference between Promise.all() and Promise.race()
 
 | Method | Behavior |
@@ -711,6 +822,10 @@ await Promise.all([p1, p2, p3]);
 ```js
 await Promise.race([p1, p2, p3]);
 ```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
 
 ---
 
@@ -750,6 +865,10 @@ const data = await fetch(url);
 
 ---
 
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
 # 20. Explain libuv in Node.js
 
 ## Answer
@@ -776,6 +895,7 @@ libuv enables Node.js to handle them efficiently.
 ## Thread Pool
 
 Default size:
+
 ```txt
 4 threads
 ```
@@ -788,4 +908,1401 @@ UV_THREADPOOL_SIZE=8
 
 ---
 
-# ✅ End of Chunk 1
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 21. What is semantic versioning (semver)?
+
+## Answer
+
+Semantic Versioning is a version naming convention:
+
+```txt
+MAJOR.MINOR.PATCH
+```
+
+Example:
+
+```txt
+2.5.1
+```
+
+| Part | Meaning |
+|---|---|
+| MAJOR | Breaking changes |
+| MINOR | New features |
+| PATCH | Bug fixes |
+
+---
+
+## Example
+
+```txt
+1.0.0 → Initial release
+1.1.0 → Added feature
+1.1.1 → Fixed bug
+2.0.0 → Breaking API changes
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 22. Difference between npm install and npm ci
+
+| npm install | npm ci |
+|---|---|
+| Used for development | Used mainly in CI/CD |
+| Updates package-lock.json | Strictly uses lock file |
+| Slower | Faster |
+| Flexible installs | Clean installs |
+
+---
+
+## npm ci Benefits
+
+- Faster pipeline builds
+- Consistent dependencies
+- Better reproducibility
+
+---
+
+## Example
+
+```bash
+npm ci
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 23. What is package-lock.json?
+
+## Answer
+
+`package-lock.json` locks exact dependency versions.
+
+It ensures:
+- Same dependency versions
+- Consistent builds
+- Stable deployments
+
+---
+
+## Why Important
+
+Without lock files:
+- Different developers may get different package versions.
+
+---
+
+## Example
+
+```json
+"express": {
+  "version": "5.2.1"
+}
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 24. How do you handle dependency vulnerabilities?
+
+## Answer
+
+Use:
+- npm audit
+- npm audit fix
+- Dependabot
+- Snyk
+
+---
+
+## Commands
+
+```bash
+npm audit
+```
+
+```bash
+npm audit fix
+```
+
+---
+
+## Best Practices
+
+- Keep dependencies updated
+- Remove unused packages
+- Use trusted libraries only
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 25. What are peer dependencies?
+
+## Answer
+
+Peer dependencies specify that a package expects another package to already exist.
+
+Common in plugins.
+
+---
+
+## Example
+
+React plugin requiring React:
+
+```json
+"peerDependencies": {
+  "react": "^18.0.0"
+}
+```
+
+---
+
+## Why Useful
+
+Prevents duplicate installations and version conflicts.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 26. How does Promise chaining work?
+
+## Answer
+
+Promise chaining passes results from one `.then()` to another.
+
+---
+
+## Example
+
+```js
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
+    return data.id;
+  })
+  .then(id => {
+    console.log(id);
+  })
+  .catch(err => console.error(err));
+```
+
+---
+
+## Benefits
+
+- Cleaner async flow
+- Better error handling
+- Avoids callback hell
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 27. What is util.promisify()?
+
+## Answer
+
+`util.promisify()` converts callback-based functions into promise-based functions.
+
+---
+
+## Example
+
+```js
+const util = require("util");
+const fs = require("fs");
+
+const readFile = util.promisify(fs.readFile);
+
+async function test() {
+  const data = await readFile("a.txt", "utf8");
+  console.log(data);
+}
+```
+
+---
+
+## Why Useful
+
+Helps modernize older Node.js APIs.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 28. How do you retry failed async operations?
+
+## Answer
+
+Use retry loops or recursive functions.
+
+---
+
+## Example
+
+```js
+async function retry(fn, retries = 3) {
+  try {
+    return await fn();
+  } catch (err) {
+    if (retries === 0) throw err;
+
+    return retry(fn, retries - 1);
+  }
+}
+```
+
+---
+
+## Real Usage
+
+- API retries
+- Database reconnects
+- Network failures
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 29. How do you implement timeout for promises?
+
+## Answer
+
+Use `Promise.race()`.
+
+---
+
+## Example
+
+```js
+function timeout(ms) {
+  return new Promise((_, reject) => {
+    setTimeout(() => reject("Timeout"), ms);
+  });
+}
+
+Promise.race([
+  fetch(url),
+  timeout(3000)
+]);
+```
+
+---
+
+## Use Cases
+
+- Prevent hanging APIs
+- Improve reliability
+- Fail fast systems
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 30. What is backpressure in streams?
+
+## Answer
+
+Backpressure occurs when data is produced faster than it is consumed.
+
+---
+
+## Problem
+
+Without backpressure handling:
+- Memory usage increases
+- App may crash
+
+---
+
+## Solution
+
+Streams automatically pause/resume flow.
+
+---
+
+## Example
+
+```js
+readable.pipe(writable);
+```
+
+---
+
+## Benefit
+
+Efficient memory usage for large files.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 31. What are middleware functions in Express?
+
+## Answer
+
+Middleware functions execute between request and response.
+
+They can:
+- Modify request/response
+- Validate auth
+- Log requests
+- Handle errors
+
+---
+
+## Example
+
+```js
+app.use((req, res, next) => {
+  console.log(req.method);
+  next();
+});
+```
+
+---
+
+## Important
+
+Without `next()`, request flow stops.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 32. Difference between app.use() and app.get()
+
+| app.use | app.get |
+|---|---|
+| Handles middleware | Handles GET routes |
+| Works for all HTTP methods | Only GET |
+| Can apply globally | Route specific |
+
+---
+
+## Example
+
+```js
+app.use(express.json());
+
+app.get("/users", (req, res) => {
+  res.send("Users");
+});
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 33. How do you handle global errors in Express?
+
+## Answer
+
+Use centralized error middleware.
+
+---
+
+## Example
+
+```js
+app.use((err, req, res, next) => {
+  res.status(500).json({
+    error: err.message
+  });
+});
+```
+
+---
+
+## Benefits
+
+- Cleaner code
+- Centralized logging
+- Standard responses
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 34. How do you handle 404 routes in Express?
+
+## Answer
+
+Add a catch-all route at the end.
+
+---
+
+## Example
+
+```js
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Route not found"
+  });
+});
+```
+
+---
+
+## Important
+
+Must be placed after all routes.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 35. Route params vs query params
+
+| Route Params | Query Params |
+|---|---|
+| Part of URL path | Optional filters |
+| req.params | req.query |
+
+---
+
+## Route Param Example
+
+```txt
+/users/10
+```
+
+```js
+req.params.id
+```
+
+---
+
+## Query Param Example
+
+```txt
+/users?page=1
+```
+
+```js
+req.query.page
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 36. How do you validate request data?
+
+## Answer
+
+Use validation libraries like:
+- Joi
+- Zod
+- express-validator
+
+---
+
+## Example
+
+```js
+const schema = Joi.object({
+  email: Joi.string().email().required()
+});
+```
+
+---
+
+## Why Important
+
+Prevents:
+- Invalid requests
+- Security issues
+- DB corruption
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 37. How do you secure Express APIs?
+
+## Answer
+
+Common security measures:
+
+- Helmet
+- CORS
+- Rate limiting
+- Input validation
+- JWT auth
+
+---
+
+## Example
+
+```js
+const helmet = require("helmet");
+
+app.use(helmet());
+```
+
+---
+
+## Additional Security
+
+- HTTPS
+- Secure cookies
+- Environment variables
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 38. How do you upload files in Express?
+
+## Answer
+
+Use multer middleware.
+
+---
+
+## Install
+
+```bash
+npm install multer
+```
+
+---
+
+## Example
+
+```js
+const multer = require("multer");
+
+const upload = multer({
+  dest: "uploads/"
+});
+
+app.post("/upload",
+  upload.single("file"),
+  (req, res) => {
+    res.send("Uploaded");
+  }
+);
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 39. How do you handle request body limits?
+
+## Answer
+
+Configure Express parser limits.
+
+---
+
+## Example
+
+```js
+app.use(express.json({
+  limit: "10mb"
+}));
+```
+
+---
+
+## Why Important
+
+Prevents:
+- DOS attacks
+- Huge payload crashes
+- Memory exhaustion
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 40. Difference between unit, integration, and E2E tests
+
+| Test Type | Scope |
+|---|---|
+| Unit | Single function/module |
+| Integration | Multiple modules together |
+| E2E | Full application flow |
+
+---
+
+## Examples
+
+### Unit Test
+
+```js
+add(2,3)
+```
+
+---
+
+### Integration Test
+
+```txt
+API + Database
+```
+
+---
+
+### E2E Test
+
+```txt
+Login → Dashboard → Logout
+```
+
+---
+
+## Testing Pyramid
+
+```txt
+More Unit Tests
+Some Integration Tests
+Few E2E Tests
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 41. What testing frameworks have you used in Node.js?
+
+## Answer
+
+Popular testing frameworks:
+
+| Framework | Purpose |
+|---|---|
+| Jest | Unit & integration testing |
+| Mocha | Flexible testing framework |
+| Chai | Assertions |
+| Supertest | API testing |
+| Nock | HTTP mocking |
+
+---
+
+## Most Common Stack
+
+```txt
+Jest + Supertest
+```
+
+---
+
+## Why Jest is Popular
+
+- Built-in mocking
+- Snapshot support
+- Coverage reports
+- Parallel execution
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 42. How do you write a unit test in Jest?
+
+## Example Function
+
+```js
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = add;
+```
+
+---
+
+## Test File
+
+```js
+const add = require("./add");
+
+test("adds numbers", () => {
+  expect(add(2, 3)).toBe(5);
+});
+```
+
+---
+
+## Run Test
+
+```bash
+npx jest
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 43. How do you test async code in Jest?
+
+## Using async/await
+
+```js
+test("fetches user", async () => {
+  const data = await getUser();
+
+  expect(data.name).toBe("Ashish");
+});
+```
+
+---
+
+## Using resolves
+
+```js
+await expect(getUser())
+  .resolves
+  .toHaveProperty("name");
+```
+
+---
+
+## Important
+
+Always return or await async operations.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 44. What are mocks, stubs, and spies?
+
+| Type | Purpose |
+|---|---|
+| Mock | Fake implementation |
+| Stub | Returns predefined data |
+| Spy | Tracks function calls |
+
+---
+
+## Spy Example
+
+```js
+const spy = jest.spyOn(console, "log");
+
+console.log("hello");
+
+expect(spy).toHaveBeenCalled();
+```
+
+---
+
+## Why Important
+
+Helps isolate tests from external dependencies.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 45. How do you mock external APIs in tests?
+
+## Using Jest Mock
+
+```js
+jest.mock("axios");
+
+axios.get.mockResolvedValue({
+  data: { name: "Ashish" }
+});
+```
+
+---
+
+## Using Nock
+
+```js
+nock("https://api.com")
+  .get("/users")
+  .reply(200, { success: true });
+```
+
+---
+
+## Benefits
+
+- Faster tests
+- No internet dependency
+- Stable test results
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 46. How do you test Express routes?
+
+## Answer
+
+Use:
+- Jest
+- Supertest
+
+---
+
+## Example
+
+```js
+const request = require("supertest");
+
+test("GET /users", async () => {
+  const res = await request(app)
+    .get("/users");
+
+  expect(res.statusCode).toBe(200);
+});
+```
+
+---
+
+## What to Verify
+
+- Status codes
+- Response body
+- Headers
+- Error handling
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 47. What is Supertest?
+
+## Answer
+
+Supertest is a library for testing HTTP APIs.
+
+It allows testing Express routes without running a real server.
+
+---
+
+## Example
+
+```js
+const request = require("supertest");
+
+await request(app)
+  .post("/login")
+  .send({
+    email: "a@test.com"
+  });
+```
+
+---
+
+## Why Useful
+
+- Fast API testing
+- Easy assertions
+- CI friendly
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 48. How do you run specific Jest tests?
+
+## Run Single File
+
+```bash
+npx jest user.test.js
+```
+
+---
+
+## Run by Test Name
+
+```bash
+npx jest -t "login test"
+```
+
+---
+
+## Run Only One Test
+
+```js
+test.only("my test", () => {});
+```
+
+---
+
+## Skip Test
+
+```js
+test.skip("skip test", () => {});
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 49. How do you measure test coverage?
+
+## Command
+
+```bash
+npx jest --coverage
+```
+
+---
+
+## Coverage Metrics
+
+| Metric | Meaning |
+|---|---|
+| Statements | Executed lines |
+| Branches | if/else coverage |
+| Functions | Function calls |
+| Lines | Total executed lines |
+
+---
+
+## Good Practice
+
+Aim for meaningful coverage, not only high percentages.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 50. What is snapshot testing?
+
+## Answer
+
+Snapshot testing compares current output with previously saved output.
+
+Useful for:
+- UI testing
+- JSON response validation
+
+---
+
+## Example
+
+```js
+expect(response.body)
+  .toMatchSnapshot();
+```
+
+---
+
+## Benefit
+
+Detects unexpected changes automatically.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 51. How do you debug Node.js applications?
+
+## Methods
+
+- console.log
+- Node Inspector
+- Chrome DevTools
+- VS Code debugger
+
+---
+
+## Start Debug Mode
+
+```bash
+node --inspect app.js
+```
+
+---
+
+## Useful Tools
+
+| Tool | Purpose |
+|---|---|
+| nodemon | Auto restart |
+| debugger keyword | Breakpoints |
+| Chrome DevTools | Visual debugging |
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 52. What are memory leaks in Node.js?
+
+## Answer
+
+Memory leaks happen when unused memory is not released.
+
+---
+
+## Common Causes
+
+- Global variables
+- Unremoved event listeners
+- Infinite caches
+- Closures
+
+---
+
+## Symptoms
+
+- Increasing RAM usage
+- Slow performance
+- Crashes
+
+---
+
+## Detection Tools
+
+- heapdump
+- Chrome DevTools
+- clinic.js
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 53. How do you profile CPU usage?
+
+## Using Built-in Profiler
+
+```bash
+node --prof app.js
+```
+
+---
+
+## Analyze
+
+```bash
+node --prof-process isolate.log
+```
+
+---
+
+## Tools
+
+| Tool | Purpose |
+|---|---|
+| clinic.js | Performance analysis |
+| autocannon | Load testing |
+| Chrome DevTools | CPU profiling |
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 54. How do you improve Node.js performance?
+
+## Best Practices
+
+- Use async operations
+- Avoid blocking code
+- Use caching
+- Optimize DB queries
+- Use streams for large files
+
+---
+
+## Additional Optimizations
+
+- Compression middleware
+- Connection pooling
+- Clustering
+- Pagination
+
+---
+
+## Example
+
+```js
+app.use(compression());
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 55. What tools are used for API debugging?
+
+| Tool | Usage |
+|---|---|
+| Postman | API testing |
+| Newman | CLI automation |
+| Curl | Terminal requests |
+| Insomnia | REST client |
+| Swagger | API documentation |
+
+---
+
+## Example Curl
+
+```bash
+curl http://localhost:3000/users
+```
+
+---
+
+## CI Usage
+
+Newman can run Postman collections in pipelines.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 56. How do you connect Node.js with PostgreSQL?
+
+## Install
+
+```bash
+npm install pg
+```
+
+---
+
+## Example
+
+```js
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  user: "postgres",
+  password: "1234",
+  database: "test"
+});
+```
+
+---
+
+## Query
+
+```js
+const result = await pool.query(
+  "SELECT * FROM users"
+);
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 57. What are connection pools?
+
+## Answer
+
+Connection pools reuse database connections instead of creating new ones every request.
+
+---
+
+## Benefits
+
+- Faster DB access
+- Better scalability
+- Reduced overhead
+
+---
+
+## Example
+
+```js
+const pool = new Pool({
+  max: 10
+});
+```
+
+---
+
+## Important
+
+Always release unused connections.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 58. How do you prevent SQL injection?
+
+## Use Parameterized Queries
+
+```js
+pool.query(
+  "SELECT * FROM users WHERE id=$1",
+  [id]
+);
+```
+
+---
+
+## Avoid
+
+```js
+"SELECT * FROM users WHERE id=" + id
+```
+
+---
+
+## Additional Security
+
+- Input validation
+- ORM usage
+- Least DB permissions
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 59. How do you test database queries?
+
+## Approaches
+
+- Mock DB calls
+- Use test database
+- In-memory database
+
+---
+
+## Example
+
+```js
+jest.spyOn(pool, "query")
+  .mockResolvedValue({
+    rows: []
+  });
+```
+
+---
+
+## Best Practice
+
+Separate DB logic into repository/service layers.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 60. What are in-memory databases in testing?
+
+## Answer
+
+In-memory databases run entirely in RAM during tests.
+
+---
+
+## Examples
+
+| Database | Tool |
+|---|---|
+| MongoDB | mongodb-memory-server |
+| SQLite | sqlite-memory |
+
+---
+
+## Benefits
+
+- Faster tests
+- Isolated environment
+- No real DB dependency
+
+---
+
+## Common Usage
+
+Integration testing.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
