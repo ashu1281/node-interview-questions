@@ -509,12 +509,41 @@ console.log("Continue...");
 
 ## Answer
 
-Streams process data piece-by-piece instead of loading everything into memory.
+Streams are objects in Node.js that allow data to be processed piece-by-piece (chunk-by-chunk) instead of loading the entire data into memory at once.
 
-Useful for:
+Streams are highly memory-efficient and are mainly used for handling:
+
 - Large files
-- Video streaming
-- Real-time processing
+- Video/audio streaming
+- File uploads/downloads
+- Real-time data processing
+- Network communication
+
+Without streams, large files would need to be fully loaded into memory, which can cause high memory usage and performance issues.
+
+---
+
+## Why Streams are Important
+
+### Without Streams
+
+```js
+const data = fs.readFileSync("largeFile.txt");
+```
+
+- Entire file loads into memory
+- High RAM usage
+- Slow for huge files
+
+### With Streams
+
+```js
+const stream = fs.createReadStream("largeFile.txt");
+```
+
+- Data comes in chunks
+- Low memory usage
+- Faster and scalable
 
 ---
 
@@ -522,10 +551,22 @@ Useful for:
 
 | Type | Description |
 |---|---|
-| Readable | Read data |
-| Writable | Write data |
-| Duplex | Read + Write |
-| Transform | Modify data |
+| Readable | Used to read data |
+| Writable | Used to write data |
+| Duplex | Can read and write data |
+| Transform | Duplex stream that modifies data |
+
+---
+
+# 1. Readable Stream
+
+Readable streams are used to read data chunk-by-chunk.
+
+### Examples
+
+- Reading files
+- HTTP requests
+- Process input
 
 ---
 
@@ -536,10 +577,231 @@ const fs = require("fs");
 
 const readStream = fs.createReadStream("input.txt");
 
-readStream.on("data", chunk => {
+readStream.on("data", (chunk) => {
   console.log(chunk.toString());
 });
+
+readStream.on("end", () => {
+  console.log("Finished reading");
+});
 ```
+
+---
+
+## Important Events
+
+| Event | Purpose |
+|---|---|
+| data | Fired when chunk is available |
+| end | Fired when reading completes |
+| error | Fired on error |
+
+---
+
+# 2. Writable Stream
+
+Writable streams are used to write data chunk-by-chunk.
+
+### Examples
+
+- Writing files
+- Sending HTTP responses
+- Logging systems
+
+---
+
+## Example
+
+```js
+const fs = require("fs");
+
+const writeStream = fs.createWriteStream("output.txt");
+
+writeStream.write("Hello\n");
+writeStream.write("Node.js Streams\n");
+
+writeStream.end();
+```
+
+---
+
+## Important Methods
+
+| Method | Purpose |
+|---|---|
+| write() | Writes chunk |
+| end() | Ends stream |
+| destroy() | Closes stream |
+
+---
+
+# 3. Duplex Stream
+
+Duplex streams support both reading and writing.
+
+### Examples
+
+- TCP sockets
+- WebSockets
+
+---
+
+## Example
+
+```js
+const { Duplex } = require("stream");
+
+const duplex = new Duplex({
+  read(size) {},
+
+  write(chunk, encoding, callback) {
+    console.log(chunk.toString());
+    callback();
+  },
+});
+
+duplex.write("Hello Duplex");
+```
+
+---
+
+# 4. Transform Stream
+
+Transform streams are duplex streams that modify data while reading/writing.
+
+### Examples
+
+- Compression
+- Encryption
+- Data transformation
+
+---
+
+## Example
+
+```js
+const { Transform } = require("stream");
+
+const upperCase = new Transform({
+  transform(chunk, encoding, callback) {
+    callback(null, chunk.toString().toUpperCase());
+  },
+});
+
+upperCase.on("data", (chunk) => {
+  console.log(chunk.toString());
+});
+
+upperCase.write("hello");
+```
+
+---
+
+## Output
+
+```txt
+HELLO
+```
+
+---
+
+# pipe() Method
+
+The `pipe()` method connects streams together.
+
+Very important interview topic.
+
+---
+
+## Example
+
+```js
+const fs = require("fs");
+
+const readStream = fs.createReadStream("input.txt");
+
+const writeStream = fs.createWriteStream("output.txt");
+
+readStream.pipe(writeStream);
+```
+
+---
+
+## Benefits of pipe()
+
+- Automatic data flow
+- Handles backpressure
+- Cleaner code
+- Memory efficient
+
+---
+
+# Backpressure
+
+Backpressure occurs when data is written faster than it can be consumed.
+
+Streams internally manage backpressure to avoid memory overload.
+
+Node.js handles this automatically using:
+
+- `pipe()`
+- internal buffering
+- `highWaterMark`
+
+---
+
+# Advantages of Streams
+
+- Memory efficient
+- Faster processing
+- Handles huge files
+- Supports real-time data
+- Better scalability
+
+---
+
+# Real-world Use Cases
+
+| Use Case | Stream Type |
+|---|---|
+| File reading | Readable |
+| File writing | Writable |
+| Compression | Transform |
+| Video streaming | Readable |
+| HTTP requests | Duplex |
+| WebSockets | Duplex |
+
+---
+
+# Interview Tip
+
+## Difference between `fs.readFile()` and `createReadStream()`
+
+| fs.readFile() | createReadStream() |
+|---|---|
+| Loads entire file into memory | Reads chunk-by-chunk |
+| High memory usage | Low memory usage |
+| Not ideal for huge files | Best for large files |
+
+---
+
+# Common Interview Questions
+
+## What is backpressure?
+
+Backpressure is the mechanism that prevents a writable stream from being overwhelmed by incoming data faster than it can process.
+
+---
+
+## Which stream type modifies data?
+
+Transform stream.
+
+---
+
+## Which method is commonly used to connect streams?
+
+`pipe()`
 
 ---
 
