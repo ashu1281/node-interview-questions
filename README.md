@@ -209,22 +209,67 @@ Ashish logged in
 
 ## Answer
 
-The event loop is the core mechanism that allows Node.js to perform non-blocking asynchronous operations.
+The event loop is the core mechanism in Node.js that enables asynchronous, non-blocking operations, even though JavaScript runs on a single thread.
 
-Even though JavaScript is single-threaded, Node.js can handle multiple operations concurrently using the event loop.
+JavaScript executes code using a single call stack, but Node.js offloads asynchronous operations such as timers, file system operations, network requests, and database queries to the browser APIs, libuv, or the operating system. Once those operations complete, their callbacks are placed into queues, and the event loop processes them when the call stack becomes empty.
+
+In simple terms:
+
+1. Synchronous code executes first on the call stack.
+2. Async operations are delegated to Node.js APIs/libuv.
+3. Completed async callbacks are added to task queues.
+4. The event loop continuously checks:
+   - Is the call stack empty?
+   - If yes, execute queued callbacks.
+
+This architecture allows Node.js to efficiently handle thousands of concurrent operations without creating a separate thread for each request.
 
 ---
 
-## Event Loop Phases
+## Core Components
+
+| Component | Purpose |
+|---|---|
+| Call Stack | Executes synchronous JavaScript code |
+| Web APIs / libuv | Handles async operations outside JS thread |
+| Callback Queue | Stores completed async callbacks |
+| Microtask Queue | Stores Promise callbacks and microtasks |
+| Event Loop | Moves tasks to call stack when stack is empty |
+
+---
+
+## Event Loop Phases in Node.js
 
 | Phase | Purpose |
 |---|---|
-| Timers | Executes setTimeout/setInterval |
-| Pending Callbacks | Executes deferred callbacks |
-| Idle/Prepare | Internal operations |
-| Poll | Retrieves new I/O events |
-| Check | Executes setImmediate |
-| Close Callbacks | Handles close events |
+| Timers | Executes `setTimeout()` and `setInterval()` callbacks |
+| Pending Callbacks | Executes deferred I/O callbacks |
+| Idle / Prepare | Internal Node.js operations |
+| Poll | Retrieves and executes I/O events |
+| Check | Executes `setImmediate()` callbacks |
+| Close Callbacks | Handles socket/file close events |
+
+---
+
+## Microtasks vs Macrotasks
+
+Microtasks have higher priority than macrotasks.
+
+### Microtasks
+
+- `Promise.then()`
+- `catch()`
+- `finally()`
+- `queueMicrotask()`
+
+### Macrotasks
+
+- `setTimeout()`
+- `setInterval()`
+- `setImmediate()`
+- I/O callbacks
+
+The event loop always executes all microtasks before moving to the next macrotask.
 
 ---
 
@@ -255,11 +300,6 @@ Promise
 Timeout
 ```
 
----
-
-[⬆ Back to Top](#-table-of-contents)
-
----
 ---
 
 [⬆ Back to Top](#-table-of-contents)
