@@ -65,11 +65,11 @@
 | 58 | [How do you prevent SQL injection?](#58-how-do-you-prevent-sql-injection) |
 | 59 | [How do you test database queries?](#59-how-do-you-test-database-queries) |
 | 60 | [What are in-memory databases in testing?](#60-what-are-in-memory-databases-in-testing) |
-| 61 | [How do you integrate tests into CI/CD pipelines?](#61-how-do-you-integrate-tests-into-cicd-pipelines) |
-| 62 | [What are artifacts in CI/CD?](#62-what-are-artifacts-in-cicd) |
-| 63 | [How do you run tests automatically on pull requests?](#63-how-do-you-run-tests-automatically-on-pull-requests) |
-| 64 | [How do you manage environment variables securely in CI/CD?](#64-how-do-you-manage-environment-variables-securely-in-cicd) |
-| 65 | [How do you handle flaky tests in CI?](#65-how-do-you-handle-flaky-tests-in-ci) |
+| 61 | [What is the difference between EventEmitter.on() and once()?](#61-what-is-the-difference-between-eventemitteron-and-once) |
+| 62 | [What is process.exit() in Node.js?](#62-what-is-processexit-in-nodejs) |
+| 63 | [How does Node.js handle uncaught exceptions?](#63-how-does-nodejs-handle-uncaught-exceptions) |
+| 64 | [What is the difference between path.join() and path.resolve()?](#64-what-is-the-difference-between-pathjoin-and-pathresolve) |
+| 65 | [What is zero-copy buffering in Node.js?](#65-what-is-zero-copy-buffering-in-nodejs) |
 | 66 | [What are common security risks in Node.js?](#66-what-are-common-security-risks-in-nodejs) |
 | 67 | [How do you prevent NoSQL injection?](#67-how-do-you-prevent-nosql-injection) |
 | 68 | [What is CORS and how do you handle it?](#68-what-is-cors-and-how-do-you-handle-it) |
@@ -85,6 +85,27 @@
 | 78 | [Move all zeros to the end of an array](#78-move-all-zeros-to-the-end-of-an-array) |
 | 79 | [Implement a debounce function](#79-implement-a-debounce-function) |
 | 80 | [Write a retry API function](#80-write-a-retry-api-function) |
+| 81 | [What is module caching in Node.js?](#81-what-is-module-caching-in-nodejs) |
+| 82 | [How do circular dependencies work in Node.js?](#82-how-do-circular-dependencies-work-in-nodejs) |
+| 83 | [What is require.resolve()?](#83-what-is-requireresolve) |
+| 84 | [How does Node.js resolve modules internally?](#84-how-does-nodejs-resolve-modules-internally) |
+| 85 | [What is the difference between fs.readFile and createReadStream?](#85-what-is-the-difference-between-fsreadfile-and-createreadstream) |
+| 86 | [What are highWaterMark settings in streams?](#86-what-are-highwatermark-settings-in-streams) |
+| 87 | [What is object mode in streams?](#87-what-is-object-mode-in-streams) |
+| 88 | [What is stream.pipeline()?](#88-what-is-streampipeline) |
+| 89 | [How do you handle stream errors properly?](#89-how-do-you-handle-stream-errors-properly) |
+| 90 | [What is the purpose of Buffer.alloc()?](#90-what-is-the-purpose-of-bufferalloc) |
+| 91 | [Difference between Buffer.alloc and Buffer.from](#91-difference-between-bufferalloc-and-bufferfrom) |
+| 92 | [How does process memoryUsage() work?](#92-how-does-processmemoryusage-work) |
+| 93 | [What is process.hrtime()?](#93-what-is-processhrtime) |
+| 94 | [What is the purpose of setMaxListeners()?](#94-what-is-the-purpose-of-setmaxlisteners) |
+| 95 | [How do you create custom events in Node.js?](#95-how-do-you-create-custom-events-in-nodejs) |
+| 96 | [What are domains in Node.js?](#96-what-are-domains-in-nodejs) |
+| 97 | [What is process.stdin and process.stdout?](#97-what-is-processstdin-and-processstdout) |
+| 98 | [How do you create CLI tools in Node.js?](#98-how-do-you-create-cli-tools-in-nodejs) |
+| 99 | [What is the purpose of shebang in Node.js scripts?](#99-what-is-the-purpose-of-shebang-in-nodejs-scripts) |
+| 100 | [How does Node.js support internationalization (i18n)?](#100-how-does-nodejs-support-internationalization-i18n) |
+
 ---
 
 # 1. What is Node.js? Why is it used?
@@ -2326,105 +2347,38 @@ Integration testing.
 
 ---
 
-# 61. How do you integrate tests into CI/CD pipelines?
+# 61. What is the difference between EventEmitter.on() and once()?
 
-## Answer
-
-Automated tests are added as pipeline steps in:
-- GitHub Actions
-- Jenkins
-- GitLab CI
+| on() | once() |
+|---|---|
+| Executes every time event occurs | Executes only once |
+| Listener remains attached | Listener auto removed |
 
 ---
 
-## Example GitHub Action
+## Example
 
-```yaml
-name: Node Tests
+```js
+const EventEmitter =
+  require("events");
 
-on: [push]
+const emitter =
+  new EventEmitter();
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
+emitter.once("login", () => {
+  console.log("Logged In");
+});
 
-    steps:
-      - uses: actions/checkout@v4
-
-      - run: npm install
-      - run: npm test
+emitter.emit("login");
+emitter.emit("login");
 ```
 
 ---
 
-## Benefits
-
-- Automatic validation
-- Faster feedback
-- Prevent broken deployments
-
----
-
-[⬆ Back to Top](#-table-of-contents)
-
----
-
-# 62. What are artifacts in CI/CD?
-
-## Answer
-
-Artifacts are files generated during pipeline execution.
-
----
-
-## Examples
-
-- Build files
-- Coverage reports
-- Test reports
-- Docker images
-
----
-
-## Why Important
-
-Artifacts can be:
-- Downloaded later
-- Shared between stages
-- Used in deployments
-
----
-
-[⬆ Back to Top](#-table-of-contents)
-
----
-
-# 63. How do you run tests automatically on pull requests?
-
-## Answer
-
-Configure CI pipelines to trigger on PR events.
-
----
-
-## GitHub Actions Example
-
-```yaml
-on:
-  pull_request:
-    branches:
-      - main
-```
-
----
-
-## Typical Flow
+## Output
 
 ```txt
-PR Created
-→ CI Runs
-→ Tests Execute
-→ Status Reported
+Logged In
 ```
 
 ---
@@ -2433,31 +2387,134 @@ PR Created
 
 ---
 
-# 64. How do you manage environment variables securely in CI/CD?
+# 62. What is process.exit() in Node.js?
 
 ## Answer
 
-Store secrets in:
-- GitHub Secrets
-- Jenkins Credentials
-- Vault services
+`process.exit()` terminates the Node.js process immediately.
 
 ---
 
-## Never Do
+## Example
+
+```js
+console.log("Start");
+
+process.exit();
+
+console.log("End");
+```
+
+---
+
+## Output
 
 ```txt
-Hardcode secrets in source code
+Start
+```
+
+---
+
+## Important
+
+Exit code:
+- `0` → Success
+- Non-zero → Failure
+
+---
+
+## Example
+
+```js
+process.exit(1);
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 63. How does Node.js handle uncaught exceptions?
+
+## Answer
+
+Uncaught exceptions can crash the application.
+
+---
+
+## Global Handler
+
+```js
+process.on(
+  "uncaughtException",
+  err => {
+    console.error(err);
+  }
+);
+```
+
+---
+
+## Best Practice
+
+- Log the error
+- Cleanup resources
+- Restart application safely
+
+---
+
+## Important
+
+Do not continue running unstable applications after critical exceptions.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 64. What is the difference between path.join() and path.resolve()?
+
+| path.join | path.resolve |
+|---|---|
+| Joins path segments | Resolves absolute path |
+| Relative output possible | Always absolute |
+
+---
+
+## Example
+
+```js
+path.join("a", "b");
+```
+
+Output:
+
+```txt
+a/b
 ```
 
 ---
 
 ## Example
 
-```yaml
-env:
-  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+```js
+path.resolve("a", "b");
 ```
+
+Output:
+
+```txt
+/full/path/a/b
+```
+
+---
+
+## Common Usage
+
+- `join()` → Relative paths
+- `resolve()` → Absolute paths
 
 ---
 
@@ -2465,35 +2522,33 @@ env:
 
 ---
 
-# 65. How do you handle flaky tests in CI?
+# 65. What is zero-copy buffering in Node.js?
 
 ## Answer
 
-Flaky tests fail inconsistently.
+Zero-copy buffering avoids unnecessary memory copying between buffers.
 
 ---
 
-## Common Causes
+## Benefits
 
-- Timing issues
-- Shared test data
-- External APIs
-- Race conditions
-
----
-
-## Solutions
-
-- Proper waits
-- Test isolation
-- Mock external systems
-- Retry mechanisms
+- Better performance
+- Lower memory usage
+- Faster networking/file operations
 
 ---
 
-## Best Practice
+## Example
 
-Fix flaky tests instead of ignoring them.
+Buffers can share memory internally instead of duplicating data.
+
+---
+
+## Common Usage
+
+- Streams
+- TCP sockets
+- File transfers
 
 ---
 
@@ -3010,6 +3065,627 @@ retryApi(() => axios.get(url));
 
 - Temporary network failures
 - External API instability
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 81. What is module caching in Node.js?
+
+## Answer
+
+When a module is loaded using `require()`, Node.js caches it.
+
+Future `require()` calls return the cached version instead of reloading the file.
+
+---
+
+## Example
+
+```js
+const math1 = require("./math");
+const math2 = require("./math");
+
+console.log(math1 === math2);
+```
+
+---
+
+## Output
+
+```txt
+true
+```
+
+---
+
+## Benefit
+
+Improves performance and avoids duplicate execution.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 82. How do circular dependencies work in Node.js?
+
+## Answer
+
+Circular dependency occurs when:
+- Module A imports B
+- Module B imports A
+
+---
+
+## Problem
+
+Modules may receive partially initialized exports.
+
+---
+
+## Example
+
+```txt
+A → B
+B → A
+```
+
+---
+
+## Best Practice
+
+Avoid tight coupling between modules.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 83. What is require.resolve()?
+
+## Answer
+
+`require.resolve()` returns the resolved file path of a module.
+
+---
+
+## Example
+
+```js
+console.log(
+  require.resolve("express")
+);
+```
+
+---
+
+## Use Cases
+
+- Debugging
+- Checking module paths
+- Dynamic loading
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 84. How does Node.js resolve modules internally?
+
+## Resolution Order
+
+1. Core modules
+2. Local files
+3. node_modules folders
+
+---
+
+## Example
+
+```js
+require("fs");
+require("./app");
+require("express");
+```
+
+---
+
+## Important
+
+Node searches parent directories recursively for `node_modules`.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 85. What is the difference between fs.readFile and createReadStream?
+
+| fs.readFile | createReadStream |
+|---|---|
+| Loads full file | Reads chunks |
+| High memory usage | Memory efficient |
+| Better for small files | Better for large files |
+
+---
+
+## Stream Example
+
+```js
+fs.createReadStream("big.zip");
+```
+
+---
+
+## Best Practice
+
+Use streams for large file processing.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 86. What are highWaterMark settings in streams?
+
+## Answer
+
+`highWaterMark` controls internal buffer size in streams.
+
+---
+
+## Example
+
+```js
+fs.createReadStream("a.txt", {
+  highWaterMark: 1024
+});
+```
+
+---
+
+## Benefit
+
+Helps optimize memory and performance.
+
+---
+
+## Units
+
+- Bytes for binary streams
+- Objects for object mode
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 87. What is object mode in streams?
+
+## Answer
+
+Object mode allows streams to process JavaScript objects instead of binary/string data.
+
+---
+
+## Example
+
+```js
+new stream.Readable({
+  objectMode: true
+});
+```
+
+---
+
+## Common Usage
+
+- JSON processing
+- Data transformations
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 88. What is stream.pipeline()?
+
+## Answer
+
+`stream.pipeline()` safely connects streams together.
+
+---
+
+## Example
+
+```js
+const pipeline =
+  require("stream").pipeline;
+
+pipeline(
+  readStream,
+  writeStream,
+  err => {
+    if (err) console.error(err);
+  }
+);
+```
+
+---
+
+## Benefits
+
+- Automatic cleanup
+- Better error handling
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 89. How do you handle stream errors properly?
+
+## Example
+
+```js
+readStream.on("error", err => {
+  console.error(err);
+});
+```
+
+---
+
+## Important
+
+Unhandled stream errors can crash applications.
+
+---
+
+## Better Option
+
+Use:
+```txt
+stream.pipeline()
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 90. What is the purpose of Buffer.alloc()?
+
+## Answer
+
+Creates a new buffer with initialized memory.
+
+---
+
+## Example
+
+```js
+const buf = Buffer.alloc(10);
+```
+
+---
+
+## Benefit
+
+Prevents security issues caused by uninitialized memory.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 91. Difference between Buffer.alloc and Buffer.from
+
+| Buffer.alloc | Buffer.from |
+|---|---|
+| Creates empty buffer | Creates from existing data |
+| Size based | Data based |
+
+---
+
+## Examples
+
+```js
+Buffer.alloc(5);
+
+Buffer.from("hello");
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 92. How does process.memoryUsage() work?
+
+## Answer
+
+Returns memory usage statistics for current process.
+
+---
+
+## Example
+
+```js
+console.log(
+  process.memoryUsage()
+);
+```
+
+---
+
+## Common Metrics
+
+| Metric | Meaning |
+|---|---|
+| rss | Total memory |
+| heapUsed | Used heap |
+| heapTotal | Total heap |
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 93. What is process.hrtime()?
+
+## Answer
+
+Provides high-resolution time measurements.
+
+---
+
+## Example
+
+```js
+const start = process.hrtime();
+
+/* task */
+
+const end = process.hrtime(start);
+
+console.log(end);
+```
+
+---
+
+## Common Usage
+
+Performance benchmarking.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 94. What is the purpose of setMaxListeners()?
+
+## Answer
+
+Controls maximum listeners allowed on EventEmitter.
+
+---
+
+## Example
+
+```js
+emitter.setMaxListeners(20);
+```
+
+---
+
+## Default Limit
+
+```txt
+10 listeners
+```
+
+---
+
+## Why Important
+
+Prevents memory leak warnings.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 95. How do you create custom events in Node.js?
+
+## Example
+
+```js
+const EventEmitter =
+  require("events");
+
+const emitter =
+  new EventEmitter();
+
+emitter.on("login", user => {
+  console.log(user);
+});
+
+emitter.emit("login", "Ashish");
+```
+
+---
+
+## Common Usage
+
+- Notifications
+- Logging systems
+- Background jobs
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 96. What are domains in Node.js?
+
+## Answer
+
+Domains were used for error handling across async operations.
+
+---
+
+## Important
+
+Domains are deprecated.
+
+---
+
+## Modern Alternative
+
+Use:
+- try/catch
+- async handlers
+- centralized error middleware
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 97. What is process.stdin and process.stdout?
+
+## Answer
+
+Standard input/output streams for CLI interaction.
+
+---
+
+## Example
+
+```js
+process.stdout.write("Hello");
+```
+
+---
+
+## Reading Input
+
+```js
+process.stdin.on("data", data => {
+  console.log(data.toString());
+});
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 98. How do you create CLI tools in Node.js?
+
+## Steps
+
+1. Create executable script
+2. Add shebang
+3. Configure package.json
+
+---
+
+## Example
+
+```js
+#!/usr/bin/env node
+
+console.log("CLI Tool");
+```
+
+---
+
+## Install Globally
+
+```bash
+npm install -g
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 99. What is the purpose of shebang in Node.js scripts?
+
+## Example
+
+```js
+#!/usr/bin/env node
+```
+
+---
+
+## Purpose
+
+Allows scripts to run directly from terminal.
+
+---
+
+## Example
+
+```bash
+./app.js
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 100. How does Node.js support internationalization (i18n)?
+
+## Answer
+
+Node.js supports i18n using:
+- Intl API
+- Libraries like i18next
+
+---
+
+## Example
+
+```js
+new Intl.DateTimeFormat(
+  "en-IN"
+).format(new Date());
+```
+
+---
+
+## Common Features
+
+- Date formatting
+- Currency formatting
+- Multi-language support
 
 ---
 
