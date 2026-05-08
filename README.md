@@ -1143,14 +1143,34 @@ app.get("/", async (req, res, next) => {
 
 # 18. Difference between Promise.all() and Promise.race()
 
-| Method | Behavior |
-|---|---|
-| Promise.all | Waits for all promises |
-| Promise.race | Returns first completed promise |
+## Answer
+
+`Promise.all()` and `Promise.race()` are Promise utility methods used to handle multiple asynchronous operations.
+
+However, both behave very differently.
 
 ---
 
-## Promise.all
+## Difference Table
+
+| Method | Behavior |
+|---|---|
+| `Promise.all()` | Waits for all promises to complete |
+| `Promise.race()` | Returns the first settled promise |
+| `Promise.allSettled()` | Waits for all promises and returns status of each |
+| `Promise.any()` | Returns the first fulfilled promise |
+
+---
+
+# 1. Promise.all()
+
+`Promise.all()` executes multiple promises in parallel and waits until ALL promises are fulfilled.
+
+If any one promise fails, the entire Promise.all() rejects immediately.
+
+---
+
+## Syntax
 
 ```js
 await Promise.all([p1, p2, p3]);
@@ -1158,11 +1178,293 @@ await Promise.all([p1, p2, p3]);
 
 ---
 
-## Promise.race
+## Example
+
+```js
+const p1 = Promise.resolve("User");
+const p2 = Promise.resolve("Posts");
+const p3 = Promise.resolve("Comments");
+
+const result = await Promise.all([p1, p2, p3]);
+
+console.log(result);
+```
+
+---
+
+## Output
+
+```txt
+[ 'User', 'Posts', 'Comments' ]
+```
+
+---
+
+## Rejection Example
+
+```js
+const p1 = Promise.resolve("Success");
+
+const p2 = Promise.reject("Failed");
+
+const p3 = Promise.resolve("Done");
+
+try {
+  const result = await Promise.all([p1, p2, p3]);
+} catch (err) {
+  console.log(err);
+}
+```
+
+---
+
+## Output
+
+```txt
+Failed
+```
+
+---
+
+## Use Cases
+
+- Fetch multiple APIs together
+- Parallel database queries
+- Running independent async tasks simultaneously
+
+---
+
+## Important Point
+
+`Promise.all()` improves performance because promises run concurrently instead of sequentially.
+
+---
+
+# 2. Promise.race()
+
+`Promise.race()` returns the first promise that gets settled (fulfilled or rejected).
+
+Other promises continue running in the background.
+
+---
+
+## Syntax
 
 ```js
 await Promise.race([p1, p2, p3]);
 ```
+
+---
+
+## Example
+
+```js
+const p1 = new Promise((resolve) =>
+  setTimeout(() => resolve("First"), 1000)
+);
+
+const p2 = new Promise((resolve) =>
+  setTimeout(() => resolve("Second"), 2000)
+);
+
+const result = await Promise.race([p1, p2]);
+
+console.log(result);
+```
+
+---
+
+## Output
+
+```txt
+First
+```
+
+---
+
+## Rejection Example
+
+```js
+const p1 = new Promise((_, reject) =>
+  setTimeout(() => reject("Error"), 500)
+);
+
+const p2 = new Promise((resolve) =>
+  setTimeout(() => resolve("Success"), 1000)
+);
+
+try {
+  const result = await Promise.race([p1, p2]);
+} catch (err) {
+  console.log(err);
+}
+```
+
+---
+
+## Output
+
+```txt
+Error
+```
+
+---
+
+## Use Cases
+
+- API timeout handling
+- Fastest server response
+- Load balancing
+- Abort slow requests
+
+---
+
+# 3. Promise.allSettled()
+
+`Promise.allSettled()` waits for ALL promises to complete, regardless of success or failure.
+
+It never rejects.
+
+---
+
+## Syntax
+
+```js
+await Promise.allSettled([p1, p2, p3]);
+```
+
+---
+
+## Example
+
+```js
+const p1 = Promise.resolve("Success");
+
+const p2 = Promise.reject("Failed");
+
+const result = await Promise.allSettled([p1, p2]);
+
+console.log(result);
+```
+
+---
+
+## Output
+
+```txt
+[
+  { status: 'fulfilled', value: 'Success' },
+  { status: 'rejected', reason: 'Failed' }
+]
+```
+
+---
+
+## Use Cases
+
+- Batch operations
+- Showing partial results
+- Logging all API responses
+
+---
+
+# 4. Promise.any()
+
+`Promise.any()` returns the first fulfilled promise.
+
+Rejected promises are ignored unless all promises fail.
+
+---
+
+## Syntax
+
+```js
+await Promise.any([p1, p2, p3]);
+```
+
+---
+
+## Example
+
+```js
+const p1 = Promise.reject("Failed 1");
+
+const p2 = Promise.resolve("Success");
+
+const p3 = Promise.reject("Failed 2");
+
+const result = await Promise.any([p1, p2, p3]);
+
+console.log(result);
+```
+
+---
+
+## Output
+
+```txt
+Success
+```
+
+---
+
+## If All Fail
+
+```js
+const p1 = Promise.reject("Error 1");
+const p2 = Promise.reject("Error 2");
+
+try {
+  const result = await Promise.any([p1, p2]);
+} catch (err) {
+  console.log(err);
+}
+```
+
+---
+
+## Output
+
+```txt
+AggregateError
+```
+
+---
+
+# Comparison Table
+
+| Method | Waits For | Rejects? | Returns |
+|---|---|---|---|
+| `Promise.all()` | All fulfilled | Yes, if one fails | Array of results |
+| `Promise.race()` | First settled | Yes | First settled result |
+| `Promise.allSettled()` | All settled | No | Status objects |
+| `Promise.any()` | First fulfilled | Only if all fail | First success |
+
+---
+
+# Interview Tip
+
+### Which Promise method is best for parallel API calls?
+
+`Promise.all()`
+
+---
+
+### Which method is used for timeout implementation?
+
+`Promise.race()`
+
+---
+
+### Which method returns partial success/failure information?
+
+`Promise.allSettled()`
+
+---
+
+### Which method ignores rejected promises?
+
+`Promise.any()`
 
 ---
 
