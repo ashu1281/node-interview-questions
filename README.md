@@ -65,7 +65,26 @@
 | 58 | [How do you prevent SQL injection?](#58-how-do-you-prevent-sql-injection) |
 | 59 | [How do you test database queries?](#59-how-do-you-test-database-queries) |
 | 60 | [What are in-memory databases in testing?](#60-what-are-in-memory-databases-in-testing) |
-
+| 61 | [How do you integrate tests into CI/CD pipelines?](#61-how-do-you-integrate-tests-into-cicd-pipelines) |
+| 62 | [What are artifacts in CI/CD?](#62-what-are-artifacts-in-cicd) |
+| 63 | [How do you run tests automatically on pull requests?](#63-how-do-you-run-tests-automatically-on-pull-requests) |
+| 64 | [How do you manage environment variables securely in CI/CD?](#64-how-do-you-manage-environment-variables-securely-in-cicd) |
+| 65 | [How do you handle flaky tests in CI?](#65-how-do-you-handle-flaky-tests-in-ci) |
+| 66 | [What are common security risks in Node.js?](#66-what-are-common-security-risks-in-nodejs) |
+| 67 | [How do you prevent NoSQL injection?](#67-how-do-you-prevent-nosql-injection) |
+| 68 | [What is CORS and how do you handle it?](#68-what-is-cors-and-how-do-you-handle-it) |
+| 69 | [What is Helmet middleware?](#69-what-is-helmet-middleware) |
+| 70 | [How do you protect API keys and secrets?](#70-how-do-you-protect-api-keys-and-secrets) |
+| 71 | [Difference between process and thread](#71-difference-between-process-and-thread) |
+| 72 | [What are worker threads in Node.js?](#72-what-are-worker-threads-in-nodejs) |
+| 73 | [How do you implement caching in Node.js?](#73-how-do-you-implement-caching-in-nodejs) |
+| 74 | [What is load balancing in Node.js?](#74-what-is-load-balancing-in-nodejs) |
+| 75 | [What design patterns are used in Node.js?](#75-what-design-patterns-are-used-in-nodejs) |
+| 76 | [Reverse a string without built-in methods](#76-reverse-a-string-without-built-in-methods) |
+| 77 | [Find duplicate elements in an array](#77-find-duplicate-elements-in-an-array) |
+| 78 | [Move all zeros to the end of an array](#78-move-all-zeros-to-the-end-of-an-array) |
+| 79 | [Implement a debounce function](#79-implement-a-debounce-function) |
+| 80 | [Write a retry API function](#80-write-a-retry-api-function) |
 ---
 
 # 1. What is Node.js? Why is it used?
@@ -2300,6 +2319,697 @@ In-memory databases run entirely in RAM during tests.
 ## Common Usage
 
 Integration testing.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 61. How do you integrate tests into CI/CD pipelines?
+
+## Answer
+
+Automated tests are added as pipeline steps in:
+- GitHub Actions
+- Jenkins
+- GitLab CI
+
+---
+
+## Example GitHub Action
+
+```yaml
+name: Node Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: npm install
+      - run: npm test
+```
+
+---
+
+## Benefits
+
+- Automatic validation
+- Faster feedback
+- Prevent broken deployments
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 62. What are artifacts in CI/CD?
+
+## Answer
+
+Artifacts are files generated during pipeline execution.
+
+---
+
+## Examples
+
+- Build files
+- Coverage reports
+- Test reports
+- Docker images
+
+---
+
+## Why Important
+
+Artifacts can be:
+- Downloaded later
+- Shared between stages
+- Used in deployments
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 63. How do you run tests automatically on pull requests?
+
+## Answer
+
+Configure CI pipelines to trigger on PR events.
+
+---
+
+## GitHub Actions Example
+
+```yaml
+on:
+  pull_request:
+    branches:
+      - main
+```
+
+---
+
+## Typical Flow
+
+```txt
+PR Created
+→ CI Runs
+→ Tests Execute
+→ Status Reported
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 64. How do you manage environment variables securely in CI/CD?
+
+## Answer
+
+Store secrets in:
+- GitHub Secrets
+- Jenkins Credentials
+- Vault services
+
+---
+
+## Never Do
+
+```txt
+Hardcode secrets in source code
+```
+
+---
+
+## Example
+
+```yaml
+env:
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 65. How do you handle flaky tests in CI?
+
+## Answer
+
+Flaky tests fail inconsistently.
+
+---
+
+## Common Causes
+
+- Timing issues
+- Shared test data
+- External APIs
+- Race conditions
+
+---
+
+## Solutions
+
+- Proper waits
+- Test isolation
+- Mock external systems
+- Retry mechanisms
+
+---
+
+## Best Practice
+
+Fix flaky tests instead of ignoring them.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 66. What are common security risks in Node.js?
+
+## Common Risks
+
+- SQL Injection
+- NoSQL Injection
+- XSS
+- CSRF
+- Dependency vulnerabilities
+
+---
+
+## Prevention
+
+- Input validation
+- Helmet
+- Rate limiting
+- Secure authentication
+
+---
+
+## Important
+
+Always update dependencies regularly.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 67. How do you prevent NoSQL injection?
+
+## Example Risk
+
+```js
+User.find({
+  username: req.body.username
+});
+```
+
+Malicious objects can manipulate queries.
+
+---
+
+## Prevention
+
+- Validate inputs
+- Sanitize requests
+- Use strict schemas
+
+---
+
+## Example
+
+```js
+typeof username === "string"
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 68. What is CORS and how do you handle it?
+
+## Answer
+
+CORS (Cross-Origin Resource Sharing) controls which domains can access APIs.
+
+---
+
+## Install
+
+```bash
+npm install cors
+```
+
+---
+
+## Example
+
+```js
+const cors = require("cors");
+
+app.use(cors({
+  origin: "https://example.com"
+}));
+```
+
+---
+
+## Why Important
+
+Prevents unauthorized frontend access.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 69. What is Helmet middleware?
+
+## Answer
+
+Helmet secures Express apps by setting HTTP security headers.
+
+---
+
+## Install
+
+```bash
+npm install helmet
+```
+
+---
+
+## Example
+
+```js
+const helmet = require("helmet");
+
+app.use(helmet());
+```
+
+---
+
+## Protection Includes
+
+- XSS protection
+- Clickjacking prevention
+- Hiding server details
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 70. How do you protect API keys and secrets?
+
+## Best Practices
+
+- Store in `.env`
+- Use secret managers
+- Rotate keys regularly
+- Restrict permissions
+
+---
+
+## Avoid
+
+```txt
+Uploading .env to GitHub
+```
+
+---
+
+## Example
+
+```js
+process.env.API_KEY
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 71. Difference between process and thread
+
+| Process | Thread |
+|---|---|
+| Independent program | Lightweight execution unit |
+| Separate memory | Shared memory |
+| More overhead | Faster |
+
+---
+
+## Node.js
+
+Node mainly runs on:
+```txt
+Single main thread
+```
+
+But uses worker threads internally.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 72. What are worker threads in Node.js?
+
+## Answer
+
+Worker threads allow parallel execution of CPU-intensive tasks.
+
+---
+
+## Useful For
+
+- Image processing
+- Data compression
+- Heavy calculations
+
+---
+
+## Example
+
+```js
+const {
+  Worker
+} = require("worker_threads");
+```
+
+---
+
+## Benefit
+
+Prevents blocking the main event loop.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 73. How do you implement caching in Node.js?
+
+## Types
+
+- In-memory cache
+- Redis cache
+
+---
+
+## Example
+
+```js
+const cache = new Map();
+
+cache.set("user", data);
+```
+
+---
+
+## Redis Benefits
+
+- Shared across servers
+- Persistent
+- Faster reads
+
+---
+
+## Common Usage
+
+Caching API responses.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 74. What is load balancing in Node.js?
+
+## Answer
+
+Load balancing distributes traffic across multiple servers/processes.
+
+---
+
+## Benefits
+
+- Better scalability
+- High availability
+- Fault tolerance
+
+---
+
+## Common Tools
+
+- Nginx
+- PM2
+- AWS ELB
+
+---
+
+## Flow
+
+```txt
+Client
+→ Load Balancer
+→ Multiple Node Servers
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 75. What design patterns are used in Node.js?
+
+## Common Patterns
+
+| Pattern | Usage |
+|---|---|
+| Singleton | Single DB instance |
+| Factory | Object creation |
+| Middleware | Express request flow |
+| Observer | EventEmitter |
+
+---
+
+## Example Singleton
+
+```js
+module.exports = new Database();
+```
+
+---
+
+## Benefit
+
+Improves code maintainability and scalability.
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 76. Reverse a string without built-in methods
+
+## Example
+
+```js
+function reverse(str) {
+  let result = "";
+
+  for (let i = str.length - 1; i >= 0; i--) {
+    result += str[i];
+  }
+
+  return result;
+}
+```
+
+---
+
+## Complexity
+
+| Time | Space |
+|---|---|
+| O(n) | O(n) |
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 77. Find duplicate elements in an array
+
+## Example
+
+```js
+function findDuplicates(arr) {
+  const seen = new Set();
+  const duplicates = new Set();
+
+  for (const num of arr) {
+    if (seen.has(num)) {
+      duplicates.add(num);
+    }
+
+    seen.add(num);
+  }
+
+  return [...duplicates];
+}
+```
+
+---
+
+## Complexity
+
+| Time | Space |
+|---|---|
+| O(n) | O(n) |
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 78. Move all zeros to the end of an array
+
+## Example
+
+```js
+function moveZeros(arr) {
+  const nonZeros = arr.filter(n => n !== 0);
+  const zeros = arr.filter(n => n === 0);
+
+  return [...nonZeros, ...zeros];
+}
+```
+
+---
+
+## Input
+
+```js
+[1,0,2,0,3]
+```
+
+---
+
+## Output
+
+```js
+[1,2,3,0,0]
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 79. Implement a debounce function
+
+## Answer
+
+Debounce delays function execution until user stops triggering events.
+
+---
+
+## Example
+
+```js
+function debounce(fn, delay) {
+  let timer;
+
+  return function (...args) {
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
+}
+```
+
+---
+
+## Common Usage
+
+- Search inputs
+- Resize events
+- Scroll handlers
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 80. Write a retry API function
+
+## Example
+
+```js
+async function retryApi(fn, retries = 3) {
+  try {
+    return await fn();
+  } catch (err) {
+    if (retries === 0) {
+      throw err;
+    }
+
+    return retryApi(fn, retries - 1);
+  }
+}
+```
+
+---
+
+## Usage
+
+```js
+retryApi(() => axios.get(url));
+```
+
+---
+
+## Real Use Cases
+
+- Temporary network failures
+- External API instability
 
 ---
 
