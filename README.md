@@ -85,67 +85,67 @@
 | 78 | [How do you structure large-scale Express projects?](#78-how-do-you-structure-large-scale-express-projects) | ⭐⭐⭐⭐⭐ Very Important |
 | 79 | [How do you implement request logging with Morgan?](#79-how-do-you-implement-request-logging-with-morgan) | ⭐⭐⭐⭐ Important |
 | 80 | [How do you implement API documentation using Swagger?](#80-how-do-you-implement-api-documentation-using-swagger) | ⭐⭐⭐⭐ Important |
-| 81 | [Difference between unit, integration, and E2E tests](#40-difference-between-unit-integration-and-e2e-tests) | ⭐⭐⭐⭐⭐ Very Important |
-| 82 | [What testing frameworks have you used in Node.js?](#41-what-testing-frameworks-have-you-used-in-nodejs) | ⭐⭐⭐⭐ Important |
-| 83 | [How do you write a unit test in Jest?](#42-how-do-you-write-a-unit-test-in-jest) | ⭐⭐⭐⭐⭐ Very Important |
-| 84 | [How do you test async code in Jest?](#43-how-do-you-test-async-code-in-jest) | ⭐⭐⭐⭐⭐ Very Important |
-| 85 | [What are mocks, stubs, and spies?](#44-what-are-mocks-stubs-and-spies) | ⭐⭐⭐⭐ Important |
-| 86 | [How do you mock external APIs in tests?](#45-how-do-you-mock-external-apis-in-tests) | ⭐⭐⭐⭐ Important |
-| 87 | [How do you test Express routes?](#46-how-do-you-test-express-routes) | ⭐⭐⭐⭐ Important |
-| 88 | [What is Supertest?](#47-what-is-supertest) | ⭐⭐⭐ Important |
-| 89 | [How do you run specific Jest tests?](#48-how-do-you-run-specific-jest-tests) | ⭐⭐⭐ Medium |
-| 90 | [How do you measure test coverage?](#49-how-do-you-measure-test-coverage) | ⭐⭐⭐ Important |
-| 91 | [What is snapshot testing?](#50-what-is-snapshot-testing) | ⭐⭐⭐ Medium |
-| 92 | [How do you debug Node.js applications?](#51-how-do-you-debug-nodejs-applications) | ⭐⭐⭐⭐ Important |
-| 93 | [What are memory leaks in Node.js?](#52-what-are-memory-leaks-in-nodejs) | ⭐⭐⭐⭐ Important |
-| 94 | [How do you profile CPU usage?](#53-how-do-you-profile-cpu-usage) | ⭐⭐⭐ Important |
-| 95 | [How do you improve Node.js performance?](#54-how-do-you-improve-nodejs-performance) | ⭐⭐⭐⭐⭐ Very Important |
-| 96 | [What tools are used for API debugging?](#55-what-tools-are-used-for-api-debugging) | ⭐⭐⭐⭐ Important |
-| 97 | [How do you connect Node.js with PostgreSQL?](#56-how-do-you-connect-nodejs-with-postgresql) | ⭐⭐⭐⭐⭐ Very Important |
-| 98 | [What are connection pools?](#57-what-are-connection-pools) | ⭐⭐⭐⭐⭐ Very Important |
-| 99 | [How do you prevent SQL injection?](#58-how-do-you-prevent-sql-injection) | ⭐⭐⭐⭐⭐ Very Important |
-| 100 | [How do you test database queries?](#59-how-do-you-test-database-queries) | ⭐⭐⭐ Important |
-| 101 | [What are in-memory databases in testing?](#60-what-are-in-memory-databases-in-testing) | ⭐⭐⭐ Medium |
-| 102 | [What is the difference between EventEmitter.on() and once()?](#61-what-is-the-difference-between-eventemitteron-and-once) | ⭐⭐⭐ Important |
-| 103 | [What is process.exit() in Node.js?](#62-what-is-processexit-in-nodejs) | ⭐⭐⭐ Important |
-| 104 | [How does Node.js handle uncaught exceptions?](#63-how-does-nodejs-handle-uncaught-exceptions) | ⭐⭐⭐⭐ Important |
-| 105 | [What is the difference between path.join() and path.resolve()?](#64-what-is-the-difference-between-pathjoin-and-pathresolve) | ⭐⭐⭐⭐ Important |
-| 106 | [What is zero-copy buffering in Node.js?](#65-what-is-zero-copy-buffering-in-nodejs) | ⭐⭐⭐ Medium |
-| 107 | [What are common security risks in Node.js?](#66-what-are-common-security-risks-in-nodejs) | ⭐⭐⭐⭐⭐ Very Important |
-| 108 | [How do you prevent NoSQL injection?](#67-how-do-you-prevent-nosql-injection) | ⭐⭐⭐⭐ Important |
-| 109 | [What is CORS and how do you handle it?](#68-what-is-cors-and-how-do-you-handle-it) | ⭐⭐⭐⭐⭐ Very Important |
-| 110 | [What is Helmet middleware?](#69-what-is-helmet-middleware) | ⭐⭐⭐⭐ Important |
-| 111 | [How do you protect API keys and secrets?](#70-how-do-you-protect-api-keys-and-secrets) | ⭐⭐⭐⭐⭐ Very Important |
-| 112 | [Difference between process and thread](#71-difference-between-process-and-thread) | ⭐⭐⭐⭐ Important |
-| 113 | [What are worker threads in Node.js?](#72-what-are-worker-threads-in-nodejs) | ⭐⭐⭐⭐ Important |
-| 114 | [How do you implement caching in Node.js?](#73-how-do-you-implement-caching-in-nodejs) | ⭐⭐⭐⭐⭐ Very Important |
-| 115 | [What is load balancing in Node.js?](#74-what-is-load-balancing-in-nodejs) | ⭐⭐⭐⭐ Important |
-| 116 | [What design patterns are used in Node.js?](#75-what-design-patterns-are-used-in-nodejs) | ⭐⭐⭐ Important |
-| 117 | [Reverse a string without built-in methods](#76-reverse-a-string-without-built-in-methods) | ⭐⭐⭐ Medium |
-| 118 | [Find duplicate elements in an array](#77-find-duplicate-elements-in-an-array) | ⭐⭐⭐ Medium |
-| 119 | [Move all zeros to the end of an array](#78-move-all-zeros-to-the-end-of-an-array) | ⭐⭐⭐ Medium |
-| 120 | [Implement a debounce function](#79-implement-a-debounce-function) | ⭐⭐⭐⭐ Important |
-| 121 | [Write a retry API function](#80-write-a-retry-api-function) | ⭐⭐⭐⭐ Important |
-| 122 | [What is module caching in Node.js?](#81-what-is-module-caching-in-nodejs) | ⭐⭐⭐⭐ Important |
-| 123 | [How do circular dependencies work in Node.js?](#82-how-do-circular-dependencies-work-in-nodejs) | ⭐⭐⭐ Important |
-| 124 | [What is require.resolve()?](#83-what-is-requireresolve) | ⭐⭐⭐ Medium |
-| 125 | [How does Node.js resolve modules internally?](#84-how-does-nodejs-resolve-modules-internally) | ⭐⭐⭐⭐ Important |
-| 126 | [What is the difference between fs.readFile and createReadStream?](#85-what-is-the-difference-between-fsreadfile-and-createreadstream) | ⭐⭐⭐⭐⭐ Very Important |
-| 127 | [What are highWaterMark settings in streams?](#86-what-are-highwatermark-settings-in-streams) | ⭐⭐⭐ Important |
-| 128 | [What is object mode in streams?](#87-what-is-object-mode-in-streams) | ⭐⭐⭐ Medium |
-| 129 | [What is stream.pipeline()?](#88-what-is-streampipeline) | ⭐⭐⭐⭐ Important |
-| 130 | [How do you handle stream errors properly?](#89-how-do-you-handle-stream-errors-properly) | ⭐⭐⭐⭐ Important |
-| 131 | [What is the purpose of Buffer.alloc()?](#90-what-is-the-purpose-of-bufferalloc) | ⭐⭐⭐ Important |
-| 132 | [Difference between Buffer.alloc and Buffer.from](#91-difference-between-bufferalloc-and-bufferfrom) | ⭐⭐⭐ Important |
-| 133 | [How does process.memoryUsage() work?](#92-how-does-processmemoryusage-work) | ⭐⭐⭐ Important |
-| 134 | [What is process.hrtime()?](#93-what-is-processhrtime) | ⭐⭐⭐ Medium |
-| 135 | [What is the purpose of setMaxListeners()?](#94-what-is-the-purpose-of-setmaxlisteners) | ⭐⭐⭐ Medium |
-| 136 | [How do you create custom events in Node.js?](#95-how-do-you-create-custom-events-in-nodejs) | ⭐⭐⭐ Important |
-| 137 | [What are domains in Node.js?](#96-what-are-domains-in-nodejs) | ⭐⭐ Rarely Asked |
-| 138 | [What is process.stdin and process.stdout?](#97-what-is-processstdin-and-processstdout) | ⭐⭐⭐ Medium |
-| 139 | [How do you create CLI tools in Node.js?](#98-how-do-you-create-cli-tools-in-nodejs) | ⭐⭐⭐ Medium |
-| 140 | [What is the purpose of shebang in Node.js scripts?](#99-what-is-the-purpose-of-shebang-in-nodejs-scripts) | ⭐⭐ Rarely Asked |
-| 141 | [How does Node.js support internationalization (i18n)?](#100-how-does-nodejs-support-internationalization-i18n) | ⭐⭐ Rarely Asked |
+| 81 | [Difference between unit, integration, and E2E tests](#81-difference-between-unit-integration-and-e2e-tests) | ⭐⭐⭐⭐⭐ Very Important |
+| 82 | [What testing frameworks have you used in Node.js?](#82-what-testing-frameworks-have-you-used-in-nodejs) | ⭐⭐⭐⭐ Important |
+| 83 | [How do you write a unit test in Jest?](#83-how-do-you-write-a-unit-test-in-jest) | ⭐⭐⭐⭐⭐ Very Important |
+| 84 | [How do you test async code in Jest?](#84-how-do-you-test-async-code-in-jest) | ⭐⭐⭐⭐⭐ Very Important |
+| 85 | [What are mocks, stubs, and spies?](#85-what-are-mocks-stubs-and-spies) | ⭐⭐⭐⭐ Important |
+| 86 | [How do you mock external APIs in tests?](#86-how-do-you-mock-external-apis-in-tests) | ⭐⭐⭐⭐ Important |
+| 87 | [How do you test Express routes?](#87-how-do-you-test-express-routes) | ⭐⭐⭐⭐ Important |
+| 88 | [What is Supertest?](#88-what-is-supertest) | ⭐⭐⭐ Important |
+| 89 | [How do you run specific Jest tests?](#89-how-do-you-run-specific-jest-tests) | ⭐⭐⭐ Medium |
+| 90 | [How do you measure test coverage?](#90-how-do-you-measure-test-coverage) | ⭐⭐⭐ Important |
+| 91 | [What is snapshot testing?](#91-what-is-snapshot-testing) | ⭐⭐⭐ Medium |
+| 92 | [How do you debug Node.js applications?](#92-how-do-you-debug-nodejs-applications) | ⭐⭐⭐⭐ Important |
+| 93 | [What are memory leaks in Node.js?](#93-what-are-memory-leaks-in-nodejs) | ⭐⭐⭐⭐ Important |
+| 94 | [How do you profile CPU usage?](#94-how-do-you-profile-cpu-usage) | ⭐⭐⭐ Important |
+| 95 | [How do you improve Node.js performance?](#95-how-do-you-improve-nodejs-performance) | ⭐⭐⭐⭐⭐ Very Important |
+| 96 | [What tools are used for API debugging?](#96-what-tools-are-used-for-api-debugging) | ⭐⭐⭐⭐ Important |
+| 97 | [How do you connect Node.js with PostgreSQL?](#97-how-do-you-connect-nodejs-with-postgresql) | ⭐⭐⭐⭐⭐ Very Important |
+| 98 | [What are connection pools?](#98-what-are-connection-pools) | ⭐⭐⭐⭐⭐ Very Important |
+| 99 | [How do you prevent SQL injection?](#99-how-do-you-prevent-sql-injection) | ⭐⭐⭐⭐⭐ Very Important |
+| 100 | [How do you test database queries?](#100-how-do-you-test-database-queries) | ⭐⭐⭐ Important |
+| 101 | [What are in-memory databases in testing?](#101-what-are-in-memory-databases-in-testing) | ⭐⭐⭐ Medium |
+| 102 | [What is the difference between EventEmitter.on() and once()?](#102-what-is-the-difference-between-eventemitteron-and-once) | ⭐⭐⭐ Important |
+| 103 | [What is process.exit() in Node.js?](#103-what-is-processexit-in-nodejs) | ⭐⭐⭐ Important |
+| 104 | [How does Node.js handle uncaught exceptions?](#104-how-does-nodejs-handle-uncaught-exceptions) | ⭐⭐⭐⭐ Important |
+| 105 | [What is the difference between path.join() and path.resolve()?](#105-what-is-the-difference-between-pathjoin-and-pathresolve) | ⭐⭐⭐⭐ Important |
+| 106 | [What is zero-copy buffering in Node.js?](#106-what-is-zero-copy-buffering-in-nodejs) | ⭐⭐⭐ Medium |
+| 107 | [What are common security risks in Node.js?](#107-what-are-common-security-risks-in-nodejs) | ⭐⭐⭐⭐⭐ Very Important |
+| 108 | [How do you prevent NoSQL injection?](#108-how-do-you-prevent-nosql-injection) | ⭐⭐⭐⭐ Important |
+| 109 | [What is CORS and how do you handle it?](#109-what-is-cors-and-how-do-you-handle-it) | ⭐⭐⭐⭐⭐ Very Important |
+| 110 | [What is Helmet middleware?](#110-what-is-helmet-middleware) | ⭐⭐⭐⭐ Important |
+| 111 | [How do you protect API keys and secrets?](#111-how-do-you-protect-api-keys-and-secrets) | ⭐⭐⭐⭐⭐ Very Important |
+| 112 | [Difference between process and thread](#112-difference-between-process-and-thread) | ⭐⭐⭐⭐ Important |
+| 113 | [What are worker threads in Node.js?](#113-what-are-worker-threads-in-nodejs) | ⭐⭐⭐⭐ Important |
+| 114 | [How do you implement caching in Node.js?](#114-how-do-you-implement-caching-in-nodejs) | ⭐⭐⭐⭐⭐ Very Important |
+| 115 | [What is load balancing in Node.js?](#115-what-is-load-balancing-in-nodejs) | ⭐⭐⭐⭐ Important |
+| 116 | [What design patterns are used in Node.js?](#116-what-design-patterns-are-used-in-nodejs) | ⭐⭐⭐ Important |
+| 117 | [Reverse a string without built-in methods](#117-reverse-a-string-without-built-in-methods) | ⭐⭐⭐ Medium |
+| 118 | [Find duplicate elements in an array](#118-find-duplicate-elements-in-an-array) | ⭐⭐⭐ Medium |
+| 119 | [Move all zeros to the end of an array](#119-move-all-zeros-to-the-end-of-an-array) | ⭐⭐⭐ Medium |
+| 120 | [Implement a debounce function](#120-implement-a-debounce-function) | ⭐⭐⭐⭐ Important |
+| 121 | [Write a retry API function](#121-write-a-retry-api-function) | ⭐⭐⭐⭐ Important |
+| 122 | [What is module caching in Node.js?](#122-what-is-module-caching-in-nodejs) | ⭐⭐⭐⭐ Important |
+| 123 | [How do circular dependencies work in Node.js?](#123-how-do-circular-dependencies-work-in-nodejs) | ⭐⭐⭐ Important |
+| 124 | [What is require.resolve()?](#124-what-is-requireresolve) | ⭐⭐⭐ Medium |
+| 125 | [How does Node.js resolve modules internally?](#125-how-does-nodejs-resolve-modules-internally) | ⭐⭐⭐⭐ Important |
+| 126 | [What is the difference between fs.readFile and createReadStream?](#126-what-is-the-difference-between-fsreadfile-and-createreadstream) | ⭐⭐⭐⭐⭐ Very Important |
+| 127 | [What are highWaterMark settings in streams?](#127-what-are-highwatermark-settings-in-streams) | ⭐⭐⭐ Important |
+| 128 | [What is object mode in streams?](#128-what-is-object-mode-in-streams) | ⭐⭐⭐ Medium |
+| 129 | [What is stream.pipeline()?](#129-what-is-streampipeline) | ⭐⭐⭐⭐ Important |
+| 130 | [How do you handle stream errors properly?](#130-how-do-you-handle-stream-errors-properly) | ⭐⭐⭐⭐ Important |
+| 131 | [What is the purpose of Buffer.alloc()?](#131-what-is-the-purpose-of-bufferalloc) | ⭐⭐⭐ Important |
+| 132 | [Difference between Buffer.alloc and Buffer.from](#132-difference-between-bufferalloc-and-bufferfrom) | ⭐⭐⭐ Important |
+| 133 | [How does process.memoryUsage() work?](#133-how-does-processmemoryusage-work) | ⭐⭐⭐ Important |
+| 134 | [What is process.hrtime()?](#134-what-is-processhrtime) | ⭐⭐⭐ Medium |
+| 135 | [What is the purpose of setMaxListeners()?](#135-what-is-the-purpose-of-setmaxlisteners) | ⭐⭐⭐ Medium |
+| 136 | [How do you create custom events in Node.js?](#136-how-do-you-create-custom-events-in-nodejs) | ⭐⭐⭐ Important |
+| 137 | [What are domains in Node.js?](#137-what-are-domains-in-nodejs) | ⭐⭐ Rarely Asked |
+| 138 | [What is process.stdin and process.stdout?](#138-what-is-processstdin-and-processstdout) | ⭐⭐⭐ Medium |
+| 139 | [How do you create CLI tools in Node.js?](#139-how-do-you-create-cli-tools-in-nodejs) | ⭐⭐⭐ Medium |
+| 140 | [What is the purpose of shebang in Node.js scripts?](#140-what-is-the-purpose-of-shebang-in-nodejs-scripts) | ⭐⭐ Rarely Asked |
+| 141 | [How does Node.js support internationalization (i18n)?](#141-how-does-nodejs-support-internationalization-i18n) | ⭐⭐ Rarely Asked |
 ---
 
 # 1. What is Node.js? Why is it used?

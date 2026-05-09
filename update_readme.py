@@ -5,8 +5,18 @@ FILE_PATH = "README.md"
 
 def parse_and_update_tables(lines):
     """
-    Update table serial numbers
-    and collect ordered questions
+    STEP 1
+
+    Update:
+    - serial numbers
+    - ONLY anchor number
+
+    Example:
+    #72-question
+    ->
+    #113-question
+
+    BUT keep question slug SAME
     """
 
     updated_lines = []
@@ -38,23 +48,26 @@ def parse_and_update_tables(lines):
         if inside_table:
 
             match = re.match(
-                r'^\|\s*\d+\s*\|\s*\[(.*?)\]\((.*?)\)\s*\|\s*(.*?)\s*\|$',
+                r'^\|\s*(\d+)\s*\|\s*\[(.*?)\]\((#\d+-(.*?))\)\s*\|\s*(.*?)\s*\|$',
                 line
             )
 
             if match:
 
-                question = match.group(1).strip()
+                question = match.group(2).strip()
 
-                anchor = match.group(2).strip()
+                old_slug = match.group(4).strip()
 
-                importance = match.group(3).strip()
+                importance = match.group(5).strip()
+
+                # ONLY update number
+                new_anchor = f"#{counter}-{old_slug}"
 
                 questions.append(question)
 
                 updated_line = (
                     f"| {counter} | "
-                    f"[{question}]({anchor}) | "
+                    f"[{question}]({new_anchor}) | "
                     f"{importance} |"
                 )
 
@@ -76,7 +89,12 @@ def parse_and_update_tables(lines):
 
 def update_question_headings(lines, questions):
     """
-    Update ONLY question headings
+    STEP 2
+
+    Update ONLY:
+    # 72. Question
+    ->
+    # 113. Question
     """
 
     updated_lines = []
@@ -87,8 +105,10 @@ def update_question_headings(lines, questions):
 
         for index, question in enumerate(questions, start=1):
 
-            # EXACT heading match only
-            pattern = rf'^#\s+\d+\.\s+{re.escape(question)}\s*$'
+            pattern = (
+                rf'^#\s+\d+\.\s+'
+                rf'{re.escape(question)}\s*$'
+            )
 
             if re.match(pattern, line):
 
@@ -114,11 +134,9 @@ def main():
     lines = content.split("\n")
 
     # STEP 1
-    # Update table numbering first
     lines, questions = parse_and_update_tables(lines)
 
     # STEP 2
-    # Update matching question headings only
     lines = update_question_headings(
         lines,
         questions
@@ -130,8 +148,9 @@ def main():
         file.write(updated_content)
 
     print("✅ Table serial numbers updated")
+    print("✅ Anchor numbers updated")
     print("✅ Question headings updated")
-    print("✅ Nothing else modified")
+    print("✅ Slug text preserved")
 
 
 if __name__ == "__main__":
