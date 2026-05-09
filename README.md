@@ -2028,6 +2028,11 @@ Common HTTP methods:
 
 In Node.js, REST APIs are commonly built using Express.js.
 
+This example uses:
+- Express.js
+- ESM modules
+- Modular folder structure
+
 ---
 
 ## Install
@@ -2038,45 +2043,212 @@ npm install express
 
 ---
 
-## Example
+## package.json
+
+```json
+{
+  "type": "module"
+}
+```
+
+---
+
+## Folder Structure
+
+```txt
+project/
+│
+├── controllers/
+│   └── userController.js
+│
+├── routes/
+│   └── userRoutes.js
+│
+├── app.js
+│
+├── package.json
+│
+└── node_modules/
+```
+
+---
+
+## app.js
 
 ```js
-const express = require("express");
+import express from "express";
+
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 
 app.use(express.json());
 
-let users = [];
-
-app.get("/users", (req, res) => {
-  res.json(users);
-});
-
-app.post("/users", (req, res) => {
-
-  users.push(req.body);
-
-  res.status(201).json({
-    message: "User created"
-  });
-});
-
-app.put("/users/:id", (req, res) => {
-
-  res.send("User updated");
-
-});
-
-app.delete("/users/:id", (req, res) => {
-
-  res.send("User deleted");
-
-});
+app.use("/users", userRoutes);
 
 app.listen(3000, () => {
-  console.log("Server running");
+
+  console.log("Server running on port 3000");
+
 });
+```
+
+---
+
+## routes/userRoutes.js
+
+```js
+import express from "express";
+
+import {
+  getUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser
+} from "../controllers/userController.js";
+
+const router = express.Router();
+
+router.get("/", getUsers);
+
+router.get("/:id", getUserById);
+
+router.post("/", createUser);
+
+router.put("/:id", updateUser);
+
+router.delete("/:id", deleteUser);
+
+export default router;
+```
+
+---
+
+## controllers/userController.js
+
+```js
+let users = [
+
+  {
+    id: 1,
+    name: "Ashish",
+    email: "ashish@test.com"
+  }
+
+];
+
+
+// GET all users
+export const getUsers = (req, res) => {
+
+  res.json(users);
+
+};
+
+
+// GET single user
+export const getUserById = (req, res) => {
+
+  const user = users.find(
+    u => u.id === Number(req.params.id)
+  );
+
+  if (!user) {
+
+    return res.status(404).json({
+      message: "User not found"
+    });
+
+  }
+
+  res.json(user);
+
+};
+
+
+// CREATE user
+export const createUser = (req, res) => {
+
+  const newUser = {
+
+    id: users.length + 1,
+
+    name: req.body.name,
+
+    email: req.body.email
+
+  };
+
+  users.push(newUser);
+
+  res.status(201).json({
+    message: "User created",
+    user: newUser
+  });
+
+};
+
+
+// UPDATE user
+export const updateUser = (req, res) => {
+
+  const user = users.find(
+    u => u.id === Number(req.params.id)
+  );
+
+  if (!user) {
+
+    return res.status(404).json({
+      message: "User not found"
+    });
+
+  }
+
+  user.name = req.body.name || user.name;
+
+  user.email = req.body.email || user.email;
+
+  res.json({
+    message: "User updated",
+    user
+  });
+
+};
+
+
+// DELETE user
+export const deleteUser = (req, res) => {
+
+  users = users.filter(
+    u => u.id !== Number(req.params.id)
+  );
+
+  res.json({
+    message: "User deleted"
+  });
+
+};
+```
+
+---
+
+## REST API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/users` | Get all users |
+| GET | `/users/:id` | Get single user |
+| POST | `/users` | Create user |
+| PUT | `/users/:id` | Update user |
+| DELETE | `/users/:id` | Delete user |
+
+---
+
+## Run Server
+
+```bash
+node app.js
 ```
 
 ---
@@ -2084,10 +2256,11 @@ app.listen(3000, () => {
 ## REST API Best Practices
 
 - Use proper HTTP methods
-- Use status codes correctly
+- Use correct status codes
 - Validate request data
 - Handle errors properly
 - Keep APIs stateless
+- Use modular architecture
 
 ---
 
