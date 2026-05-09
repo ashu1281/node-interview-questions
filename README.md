@@ -2594,11 +2594,21 @@ app.listen(3000, () => {
 
 ## Answer
 
-Use multer middleware.
+In Express.js, file uploads are commonly handled using the `multer` middleware.
+
+`multer` processes incoming `multipart/form-data`, which is mainly used for uploading files.
+
+It supports:
+- Single file upload
+- Multiple file uploads
+- File validation
+- Custom file names
+- File size limits
+- Storage configuration
 
 ---
 
-## Install
+# Install Multer
 
 ```bash
 npm install multer
@@ -2606,22 +2616,206 @@ npm install multer
 
 ---
 
+# Basic Single File Upload
+
 ## Example
 
 ```js
+const express = require("express");
 const multer = require("multer");
+
+const app = express();
 
 const upload = multer({
   dest: "uploads/"
 });
 
-app.post("/upload",
+app.post(
+  "/upload",
   upload.single("file"),
   (req, res) => {
-    res.send("Uploaded");
+    res.json({
+      message: "File uploaded successfully",
+      file: req.file
+    });
+  }
+);
+
+app.listen(3000, () => {
+  console.log("Server running");
+});
+```
+
+---
+
+# Explanation
+
+| Method | Purpose |
+|---|---|
+| `upload.single("file")` | Upload one file |
+| `upload.array("files", 5)` | Upload multiple files |
+| `req.file` | Contains uploaded file info |
+| `req.files` | Contains multiple uploaded files |
+
+---
+
+# File Information Available
+
+```js
+console.log(req.file);
+```
+
+Example output:
+
+```json
+{
+  "fieldname": "file",
+  "originalname": "photo.png",
+  "encoding": "7bit",
+  "mimetype": "image/png",
+  "destination": "uploads/",
+  "filename": "abc123.png",
+  "path": "uploads/abc123.png",
+  "size": 20480
+}
+```
+
+---
+
+# Multiple File Upload
+
+```js
+app.post(
+  "/uploads",
+  upload.array("files", 5),
+  (req, res) => {
+    res.json({
+      message: "Files uploaded",
+      files: req.files
+    });
   }
 );
 ```
+
+---
+
+# Custom Storage Configuration
+
+Using `diskStorage()` allows custom filenames and folders.
+
+```js
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/");
+  },
+
+  filename: function (req, file, cb) {
+    const uniqueName =
+      Date.now() + "-" + file.originalname;
+
+    cb(null, uniqueName);
+  }
+});
+
+const upload = multer({ storage });
+```
+
+---
+
+# File Type Validation
+
+Restrict uploads to specific file types.
+
+```js
+const upload = multer({
+  storage,
+
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpeg"
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only images allowed"));
+    }
+  }
+});
+```
+
+---
+
+# File Size Limit
+
+```js
+const upload = multer({
+  storage,
+
+  limits: {
+    fileSize: 2 * 1024 * 1024
+  }
+});
+```
+
+This limits uploads to 2 MB.
+
+---
+
+# Error Handling
+
+```js
+app.post("/upload", (req, res) => {
+  upload.single("file")(req, res, function (err) {
+
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({
+        message: err.message
+      });
+    }
+
+    if (err) {
+      return res.status(500).json({
+        message: err.message
+      });
+    }
+
+    res.send("File uploaded successfully");
+  });
+});
+```
+
+---
+
+# Best Practices
+
+| Best Practice | Reason |
+|---|---|
+| Validate file types | Prevent malicious uploads |
+| Limit file size | Prevent server overload |
+| Rename files uniquely | Avoid filename conflicts |
+| Store outside root folder | Improve security |
+| Scan uploaded files | Detect malware |
+| Use cloud storage | Better scalability |
+
+---
+
+# Upload Files to Cloud Storage
+
+Common cloud storage services:
+- AWS S3
+- Cloudinary
+- Firebase Storage
+
+Example libraries:
+- `multer-s3`
+- `cloudinary`
+- `firebase-admin`
+
+---
+
+# Interview Summary Answer
+
+> In Express.js, file uploads are commonly handled using the multer middleware. Multer processes multipart/form-data and supports single or multiple file uploads. We can configure storage locations, custom filenames, file validation, and file size limits. Uploaded file information becomes available in req.file or req.files. For production systems, files are usually stored in cloud storage like AWS S3 or Cloudinary.
 
 ---
 
