@@ -1207,14 +1207,14 @@ However, both behave very differently.
 
 ---
 
-## Difference Table
+# Comparison Table
 
-| Method | Behavior |
-|---|---|
-| `Promise.all()` | Waits for all promises to complete |
-| `Promise.race()` | Returns the first settled promise |
-| `Promise.allSettled()` | Waits for all promises and returns status of each |
-| `Promise.any()` | Returns the first fulfilled promise |
+| Method | Waits For | Rejects? | Returns |
+|---|---|---|---|
+| `Promise.all()` | All fulfilled | Yes, if one fails | Array of results |
+| `Promise.race()` | First settled | Yes | First settled result |
+| `Promise.allSettled()` | All settled | No | Status objects |
+| `Promise.any()` | First fulfilled | Only if all fail | First success |
 
 ---
 
@@ -1484,17 +1484,6 @@ try {
 ```txt
 AggregateError
 ```
-
----
-
-# Comparison Table
-
-| Method | Waits For | Rejects? | Returns |
-|---|---|---|---|
-| `Promise.all()` | All fulfilled | Yes, if one fails | Array of results |
-| `Promise.race()` | First settled | Yes | First settled result |
-| `Promise.allSettled()` | All settled | No | Status objects |
-| `Promise.any()` | First fulfilled | Only if all fail | First success |
 
 ---
 
