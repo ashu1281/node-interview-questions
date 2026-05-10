@@ -2419,40 +2419,36 @@ A secure Express application should use multiple layers of security.
 
 # Security Features Summary
 
-| # | Security Measure | Purpose | Common Package / Method |
-|---|---|---|---|
-| 1 | Helmet | Adds secure HTTP headers | `helmet` |
-| 2 | CORS | Controls cross-origin access | `cors` |
-| 3 | Rate Limiting | Prevents brute-force and API abuse | `express-rate-limit` |
-| 4 | Input Validation | Prevents invalid/malicious input | `express-validator`, `Joi` |
-| 5 | JWT Authentication | Secures protected routes | `jsonwebtoken` |
-| 6 | Environment Variables | Protects sensitive credentials | `dotenv`, `process.env` |
-| 7 | HTTPS | Encrypts client-server communication | SSL/TLS |
-| 8 | Secure Cookies | Prevents token theft and CSRF | `httpOnly`, `secure` cookies |
-| 9 | SQL/NoSQL Injection Prevention | Prevents malicious database queries | Parameterized queries |
-| 10 | Error Handling | Prevents internal info leakage | Custom error middleware |
-| 11 | Disable X-Powered-By | Hides Express technology stack | `app.disable()` |
-| 12 | Logging & Monitoring | Tracks suspicious activities | `Morgan`, `Winston`, `Pino` |
-| 13 | Dependency Auditing | Detects vulnerable packages | `npm audit` |
+| # | Security Measure | Purpose | Common Package / Method | Example |
+|---|---|---|---|---|
+| 1 | Helmet | Adds secure HTTP headers | `helmet` | `app.use(helmet())` |
+| 2 | CORS | Controls cross-origin access | `cors` | `app.use(cors())` |
+| 3 | Rate Limiting | Prevents brute-force and API abuse | `express-rate-limit` | `app.use(rateLimit())` |
+| 4 | Input Validation | Prevents invalid/malicious input | `express-validator`, `Joi` | `body("email").isEmail()` |
+| 5 | JWT Authentication | Secures protected routes | `jsonwebtoken` | `jwt.verify(token, SECRET)` |
+| 6 | Environment Variables | Protects sensitive credentials | `dotenv`, `process.env` | `process.env.DB_PASSWORD` |
+| 7 | HTTPS | Encrypts client-server communication | SSL/TLS | `https.createServer()` |
+| 8 | Secure Cookies | Prevents token theft and CSRF | `httpOnly`, `secure` cookies | `res.cookie("token", t, { httpOnly: true })` |
+| 9 | SQL/NoSQL Injection Prevention | Prevents malicious database queries | Parameterized queries | `User.findOne({ email })` |
+| 10 | Error Handling | Prevents internal info leakage | Custom error middleware | `app.use(errorHandler)` |
+| 11 | Disable X-Powered-By | Hides Express technology stack | `app.disable()` | `app.disable("x-powered-by")` |
+| 12 | Logging & Monitoring | Tracks suspicious activities | `Morgan`, `Winston`, `Pino` | `app.use(morgan("combined"))` |
+| 13 | Dependency Auditing | Detects vulnerable packages | `npm audit` | `npm audit fix` |
+| 14 | Password Hashing | Stores passwords securely | `bcrypt` | `bcrypt.hash(password, 10)` |
+| 15 | CSRF Protection | Prevents Cross-Site Request Forgery | `csurf` | `app.use(csrf())` |
+| 16 | XSS Protection | Prevents script injection attacks | `xss-clean` | `app.use(xss())` |
+| 17 | HPP Protection | Prevents HTTP Parameter Pollution | `hpp` | `app.use(hpp())` |
+| 18 | File Upload Validation | Prevents malicious file uploads | `multer`, MIME validation | `file.mimetype === "image/png"` |
+| 19 | Request Size Limiting | Prevents large payload attacks | `express.json({ limit })` | `express.json({ limit: "1mb" })` |
+| 20 | Session Security | Protects user sessions | `express-session` | `cookie: { secure: true }` |
+| 21 | API Key Protection | Restricts API access | API keys, middleware | `if(apiKey !== KEY)` |
+| 22 | Data Encryption | Encrypts sensitive stored data | `crypto` | `crypto.createCipheriv()` |
+| 23 | Access Control / RBAC | Restricts user permissions | Role middleware | `if(user.role !== "admin")` |
+| 24 | Security Headers | Prevents clickjacking/XSS | CSP, HSTS | `helmet.contentSecurityPolicy()` |
+| 25 | Token Expiration | Limits stolen token usage | JWT expiry | `expiresIn: "1h"` |
 
 ---
 
-# Quick Example Table
-
-| Feature | Example |
-|---|---|
-| Helmet | `app.use(helmet())` |
-| CORS | `app.use(cors())` |
-| Rate Limit | `app.use(rateLimit())` |
-| JWT | `jwt.sign()` |
-| Validation | `body("email").isEmail()` |
-| HTTPS | SSL Certificate |
-| Cookies | `httpOnly: true` |
-| Environment Variables | `process.env.JWT_SECRET` |
-| SQL Protection | Parameterized Queries |
-| Error Handling | `app.use(errorMiddleware)` |
-
----
 
 # 1. Use Helmet for Secure HTTP Headers
 
