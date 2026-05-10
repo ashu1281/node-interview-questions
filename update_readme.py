@@ -9,14 +9,13 @@ def parse_and_update_tables(lines):
 
     Update:
     - serial numbers
-    - ONLY anchor number
+    - anchor numbers
+    - collect questions + stars
 
     Example:
     #72-question
     ->
     #113-question
-
-    BUT keep question slug SAME
     """
 
     updated_lines = []
@@ -58,17 +57,22 @@ def parse_and_update_tables(lines):
 
                 old_slug = match.group(4).strip()
 
-                importance = match.group(5).strip()
+                stars = match.group(5).strip()
 
-                # ONLY update number
+                # update only number
                 new_anchor = f"#{counter}-{old_slug}"
 
-                questions.append(question)
+                # save question + stars
+                questions.append({
+                    "number": counter,
+                    "question": question,
+                    "stars": stars
+                })
 
                 updated_line = (
                     f"| {counter} | "
                     f"[{question}]({new_anchor}) | "
-                    f"{importance} |"
+                    f"{stars} |"
                 )
 
                 updated_lines.append(updated_line)
@@ -91,10 +95,12 @@ def update_question_headings(lines, questions):
     """
     STEP 2
 
-    Update ONLY:
+    Update:
     # 72. Question
     ->
-    # 113. Question
+    # 72. Question ⭐⭐⭐
+
+    ONLY matching questions
     """
 
     updated_lines = []
@@ -103,17 +109,24 @@ def update_question_headings(lines, questions):
 
         updated = False
 
-        for index, question in enumerate(questions, start=1):
+        for item in questions:
+
+            number = item["number"]
+
+            question = item["question"]
+
+            stars = item["stars"]
 
             pattern = (
                 rf'^#\s+\d+\.\s+'
-                rf'{re.escape(question)}\s*$'
+                rf'{re.escape(question)}'
+                rf'(?:\s+⭐+)?\s*$'
             )
 
             if re.match(pattern, line):
 
                 updated_lines.append(
-                    f"# {index}. {question}"
+                    f"# {number}. {question} {stars}"
                 )
 
                 updated = True
@@ -150,6 +163,7 @@ def main():
     print("✅ Table serial numbers updated")
     print("✅ Anchor numbers updated")
     print("✅ Question headings updated")
+    print("✅ Stars added to headings")
     print("✅ Slug text preserved")
 
 
