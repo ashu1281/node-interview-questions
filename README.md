@@ -6947,3 +6947,376 @@ new Intl.DateTimeFormat(
 [⬆ Back to Top](#-table-of-contents)
 
 ---
+
+# 148. What are Microservices in Node.js? ☆☆☆☆☆
+
+## Answer
+
+Microservices architecture divides a large application into smaller independent services.
+
+Each service:
+- Handles a specific business feature
+- Runs independently
+- Has its own database or logic
+
+Node.js is commonly used for microservices because of its lightweight and asynchronous nature.
+
+---
+
+## Example Microservices
+
+- User Service
+- Payment Service
+- Notification Service
+- Order Service
+
+---
+
+## Benefits
+
+- Easy scalability
+- Independent deployment
+- Better maintainability
+- Fault isolation
+
+---
+
+## Example Structure
+
+```txt
+services/
+ ├── user-service/
+ ├── payment-service/
+ ├── order-service/
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 149. How do microservices communicate with each other? ☆☆☆☆
+
+## Answer
+
+Microservices communicate using:
+
+- HTTP APIs
+- Message queues
+- Event brokers
+
+Common tools:
+- REST
+- gRPC
+- RabbitMQ
+- Kafka
+
+---
+
+## REST Example
+
+```js
+const response = await fetch(
+  "http://user-service/users/1"
+);
+```
+
+---
+
+## Event-Based Example
+
+```txt
+Order Created
+   ↓
+Payment Service
+   ↓
+Notification Service
+```
+
+---
+
+## Benefits
+
+- Loose coupling
+- Better scalability
+- Independent services
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 150. How do you design scalable Node.js systems? ☆☆☆☆☆
+
+## Answer
+
+Scalable systems can handle increasing traffic efficiently.
+
+Common scalability techniques:
+- Load balancing
+- Caching
+- Database indexing
+- Horizontal scaling
+- Queue systems
+
+---
+
+## Architecture Example
+
+```txt
+Client
+   ↓
+Load Balancer
+   ↓
+Node.js Servers
+   ↓
+Redis Cache
+   ↓
+Database
+```
+
+---
+
+## Best Practices
+
+- Keep APIs stateless
+- Use caching
+- Use asynchronous processing
+- Optimize database queries
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 151. How do you improve performance in Node.js applications? ☆☆☆☆☆
+
+## Answer
+
+Performance optimization improves response time and scalability.
+
+Common techniques:
+- Use caching
+- Optimize database queries
+- Compression
+- Pagination
+- Clustering
+- Streams
+
+---
+
+## Example
+
+```js
+app.use(compression());
+```
+
+---
+
+## Performance Tools
+
+- Redis
+- PM2
+- Nginx
+- Worker Threads
+
+---
+
+## Benefits
+
+- Faster APIs
+- Reduced server load
+- Better scalability
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 152. How do you handle database scaling in large applications? ☆☆☆☆
+
+## Answer
+
+Database scaling improves performance for high traffic applications.
+
+Common techniques:
+- Replication
+- Sharding
+- Indexing
+- Read replicas
+- Caching
+
+---
+
+## Example
+
+```txt
+App
+ ↓
+Read Replica
+ ↓
+Primary Database
+```
+
+---
+
+## Benefits
+
+- Faster queries
+- Better availability
+- Improved scalability
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 153. What is load balancing in system design? ☆☆☆☆
+
+## Answer
+
+Load balancing distributes incoming traffic across multiple servers.
+
+It prevents server overload and improves availability.
+
+Common load balancers:
+- Nginx
+- AWS ELB
+- HAProxy
+
+---
+
+## Architecture Example
+
+```txt
+Clients
+   ↓
+Load Balancer
+   ↓
+Server 1
+Server 2
+Server 3
+```
+
+---
+
+## Benefits
+
+- High availability
+- Better performance
+- Fault tolerance
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 154. How do you design a URL Shortener system? ☆☆☆☆
+
+## Answer
+
+A URL shortener converts long URLs into short unique links.
+
+Main components:
+- API server
+- Database
+- Unique ID generator
+- Cache
+
+---
+
+## Flow
+
+```txt
+Long URL
+   ↓
+Generate Short Code
+   ↓
+Store in Database
+   ↓
+Return Short URL
+```
+
+---
+
+## Example
+
+```txt
+https://example.com/abc123
+```
+
+---
+
+## Important Features
+
+- Fast redirection
+- Unique short codes
+- Analytics tracking
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 155. How do you design a real-time chat application? ☆☆☆☆☆
+
+## Answer
+
+A real-time chat application allows instant message delivery between users.
+
+Common technologies:
+- WebSockets
+- Socket.io
+- Redis Pub/Sub
+
+---
+
+## Architecture
+
+```txt
+Client
+   ↕
+Socket.io Server
+   ↕
+Redis
+   ↕
+Database
+```
+
+---
+
+## Features
+
+- Real-time messaging
+- Online status
+- Typing indicators
+- Message persistence
+
+---
+
+## Example
+
+```js
+io.on("connection", (socket) => {
+
+  socket.on("message", (msg) => {
+
+    io.emit("message", msg);
+
+  });
+
+});
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
