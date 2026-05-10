@@ -120,7 +120,8 @@ def update_question_headings(lines, questions):
             pattern = (
                 rf'^#\s+\d+\.\s+'
                 rf'{re.escape(question)}'
-                rf'(?:\s+⭐+)?\s*$'
+                rf'(?:\s+[⭐☆]+)?'
+                rf'(?:\s+\w+)?\s*$'
             )
 
             if re.match(pattern, line):
