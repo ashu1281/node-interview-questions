@@ -152,6 +152,15 @@
 | 145 | [How do you avoid callback hell in Node.js?](#145-how-do-you-avoid-callback-hell-in-nodejs-) | ⭐⭐⭐ |
 | 146 | [Why should you separate Express app and server?](#146-why-should-you-separate-express-app-and-server-) | ⭐⭐⭐⭐ |
 | 147 | [How does Node.js support internationalization (i18n)?](#147-how-does-nodejs-support-internationalization-i18n-) | ⭐ |
+| 148 | [What are Microservices in Node.js?](#148-what-are-microservices-in-nodejs) | ⭐⭐⭐⭐⭐ |
+| 149 | [How do microservices communicate with each other?](#149-how-do-microservices-communicate-with-each-other) | ⭐⭐⭐⭐ |
+| 150 | [How do you design scalable Node.js systems?](#150-how-do-you-design-scalable-nodejs-systems) | ⭐⭐⭐⭐⭐ |
+| 151 | [How do you improve performance in Node.js applications?](#151-how-do-you-improve-performance-in-nodejs-applications) | ⭐⭐⭐⭐⭐ |
+| 152 | [How do you handle database scaling in large applications?](#152-how-do-you-handle-database-scaling-in-large-applications) | ⭐⭐⭐⭐ |
+| 153 | [What is load balancing in system design?](#153-what-is-load-balancing-in-system-design) | ⭐⭐⭐⭐ |
+| 154 | [How do you design a URL Shortener system?](#154-how-do-you-design-a-url-shortener-system) | ⭐⭐⭐⭐ |
+| 155 | [How do you design a real-time chat application?](#155-how-do-you-design-a-real-time-chat-application) | ⭐⭐⭐⭐⭐ |
+
 ---
 
 # 1. What is Node.js? Why is it used? ☆☆☆☆☆
