@@ -55,7 +55,7 @@
 | 48 | [How do you create reusable route middlewares?](#48-how-do-you-create-reusable-route-middlewares-) | ⭐⭐⭐⭐⭐ |
 | 49 | [How do you implement authentication in Express?](#49-how-do-you-implement-authentication-in-express-) | ⭐⭐⭐⭐⭐ |
 | 50 | [What is the difference between authentication and authorization?](#50-what-is-the-difference-between-authentication-and-authorization-) | ⭐⭐⭐⭐⭐ |
-| 51 | [How do you implement role-based access control (RBAC)?](#51-how-do-you-implement-role-based-access-control-rbac-) | ⭐⭐⭐⭐ |
+| 51 | [How do you implement role-based access control (RBAC), ABAC, and PBAC?](#51-how-do-you-implement-role-based-access-control-rbac-abac-and-pbac) | ⭐⭐⭐⭐ |
 | 52 | [How do you refresh JWT tokens securely?](#52-how-do-you-refresh-jwt-tokens-securely-) | ⭐⭐⭐⭐ |
 | 53 | [How do you store passwords securely?](#53-how-do-you-store-passwords-securely-) | ⭐⭐⭐⭐⭐ |
 | 54 | [What is bcrypt and why is it used?](#54-what-is-bcrypt-and-why-is-it-used-) | ⭐⭐⭐⭐⭐ |
@@ -3477,11 +3477,23 @@ Authorization checks what the user can access.
 [⬆ Back to Top](#-table-of-contents)
 
 ---
-# 51. How do you implement role-based access control (RBAC)? ☆☆☆☆
+
+# 51. How do you implement role-based access control (RBAC), ABAC, and PBAC? ☆☆☆☆
 
 ## Answer
 
-RBAC restricts access to routes based on user roles.
+Authorization controls what users are allowed to access in a system.
+
+Common authorization models:
+- RBAC → Role-Based Access Control
+- ABAC → Attribute-Based Access Control
+- PBAC → Policy-Based Access Control
+
+---
+
+## 1. RBAC (Role-Based Access Control)
+
+RBAC restricts access based on user roles.
 
 Common roles:
 - Admin
@@ -3492,7 +3504,7 @@ Authorization middleware checks whether the user has permission to access a rout
 
 ---
 
-## Example
+## RBAC Example
 
 ```js
 function authorize(role) {
@@ -3500,7 +3512,11 @@ function authorize(role) {
   return (req, res, next) => {
 
     if (req.user.role !== role) {
-      return res.status(403).send("Forbidden");
+
+      return res.status(403).send(
+        "Forbidden"
+      );
+
     }
 
     next();
@@ -3511,10 +3527,109 @@ app.get(
   "/admin",
   authorize("admin"),
   (req, res) => {
+
     res.send("Admin Route");
+
   }
 );
 ```
+
+---
+
+## 2. ABAC (Attribute-Based Access Control)
+
+ABAC grants access based on attributes such as:
+- User attributes
+- Resource ownership
+- Device
+- Location
+- Time
+
+---
+
+## ABAC Example
+
+```js
+function authorize(req, res, next) {
+
+  const isOwner =
+    req.user.id === req.params.userId;
+
+  if (!isOwner) {
+
+    return res.status(403).send(
+      "Access denied"
+    );
+
+  }
+
+  next();
+}
+```
+
+---
+
+## 3. PBAC (Policy-Based Access Control)
+
+PBAC grants access using centralized policies and rules.
+
+Policies define:
+- Who can access
+- What can be accessed
+- Under which conditions
+
+---
+
+## PBAC Example
+
+```js
+const policy = {
+
+  admin: ["create", "delete"],
+
+  user: ["read"]
+
+};
+
+function authorize(action) {
+
+  return (req, res, next) => {
+
+    const permissions =
+      policy[req.user.role] || [];
+
+    if (!permissions.includes(action)) {
+
+      return res.status(403).send(
+        "Forbidden"
+      );
+
+    }
+
+    next();
+  };
+}
+```
+
+---
+
+## Difference Table
+
+| Model | Based On | Example |
+|---|---|---|
+| RBAC | Roles | Admin/User |
+| ABAC | Attributes | Resource owner |
+| PBAC | Policies | Rule-based permissions |
+
+---
+
+## Interview Summary
+
+- RBAC → Access based on roles
+- ABAC → Access based on attributes
+- PBAC → Access based on centralized policies
+
+Modern applications often combine these models for better security.
 
 ---
 
