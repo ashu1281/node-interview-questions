@@ -55,7 +55,7 @@
 | 48 | [How do you create reusable route middlewares?](#48-how-do-you-create-reusable-route-middlewares-) | ⭐⭐⭐⭐⭐ |
 | 49 | [How do you implement authentication in Express?](#49-how-do-you-implement-authentication-in-express-) | ⭐⭐⭐⭐⭐ |
 | 50 | [What is the difference between authentication and authorization?](#50-what-is-the-difference-between-authentication-and-authorization-) | ⭐⭐⭐⭐⭐ |
-| 51 | [How do you implement role-based access control (RBAC), ABAC, and PBAC?](#51-how-do-you-implement-role-based-access-control-rbac-abac-and-pbac) | ⭐⭐⭐⭐ |
+| 51 | [How do you implement role-based access control (RBAC), ABAC, and PBAC?](#51-how-do-you-implement-role-based-access-control-rbac-abac-and-pbac-) | ⭐⭐⭐⭐ |
 | 52 | [How do you refresh JWT tokens securely?](#52-how-do-you-refresh-jwt-tokens-securely-) | ⭐⭐⭐⭐ |
 | 53 | [How do you store passwords securely?](#53-how-do-you-store-passwords-securely-) | ⭐⭐⭐⭐⭐ |
 | 54 | [What is bcrypt and why is it used?](#54-what-is-bcrypt-and-why-is-it-used-) | ⭐⭐⭐⭐⭐ |
