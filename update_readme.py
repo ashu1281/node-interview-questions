@@ -1,6 +1,6 @@
 import re
 
-FILE_PATH = "README.md"
+FILE_PATH = "node-js-interview-questions.md"
 
 
 def parse_and_update_tables(lines):
