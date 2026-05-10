@@ -151,14 +151,14 @@
 | 143 | [How do you avoid callback hell in Node.js?](#143-how-do-you-avoid-callback-hell-in-nodejs-) | ⭐⭐⭐ |
 | 144 | [Why should you separate Express app and server?](#144-why-should-you-separate-express-app-and-server-) | ⭐⭐⭐⭐ |
 | 145 | [How does Node.js support internationalization (i18n)?](#145-how-does-nodejs-support-internationalization-i18n-) | ⭐ |
-| 146 | [What are Microservices in Node.js?](#146-what-are-microservices-in-nodejs) | ⭐⭐⭐⭐⭐ |
-| 147 | [How do microservices communicate with each other?](#147-how-do-microservices-communicate-with-each-other) | ⭐⭐⭐⭐ |
-| 148 | [How do you design scalable Node.js systems?](#148-how-do-you-design-scalable-nodejs-systems) | ⭐⭐⭐⭐⭐ |
-| 149 | [How do you improve performance in Node.js applications?](#149-how-do-you-improve-performance-in-nodejs-applications) | ⭐⭐⭐⭐⭐ |
-| 150 | [How do you handle database scaling in large applications?](#150-how-do-you-handle-database-scaling-in-large-applications) | ⭐⭐⭐⭐ |
-| 151 | [What is load balancing in system design?](#151-what-is-load-balancing-in-system-design) | ⭐⭐⭐⭐ |
-| 152 | [How do you design a URL Shortener system?](#152-how-do-you-design-a-url-shortener-system) | ⭐⭐⭐⭐ |
-| 153 | [How do you design a real-time chat application?](#153-how-do-you-design-a-real-time-chat-application) | ⭐⭐⭐⭐⭐ |
+| 146 | [What are Microservices in Node.js?](#146-what-are-microservices-in-nodejs-) | ⭐⭐⭐⭐⭐ |
+| 147 | [How do microservices communicate with each other?](#147-how-do-microservices-communicate-with-each-other-) | ⭐⭐⭐⭐ |
+| 148 | [How do you design scalable Node.js systems?](#148-how-do-you-design-scalable-nodejs-systems-) | ⭐⭐⭐⭐⭐ |
+| 149 | [How do you improve performance in Node.js applications?](#149-how-do-you-improve-performance-in-nodejs-applications-) | ⭐⭐⭐⭐⭐ |
+| 150 | [How do you handle database scaling in large applications?](#150-how-do-you-handle-database-scaling-in-large-applications-) | ⭐⭐⭐⭐ |
+| 151 | [What is load balancing in system design?](#151-what-is-load-balancing-in-system-design-) | ⭐⭐⭐⭐ |
+| 152 | [How do you design a URL Shortener system?](#152-how-do-you-design-a-url-shortener-system-) | ⭐⭐⭐⭐ |
+| 153 | [How do you design a real-time chat application?](#153-how-do-you-design-a-real-time-chat-application-) | ⭐⭐⭐⭐⭐ |
 
 ---
 
