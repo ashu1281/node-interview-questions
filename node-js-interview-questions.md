@@ -146,7 +146,12 @@
 | 139 | [What is process.stdin and process.stdout?](#139-what-is-processstdin-and-processstdout) | ⭐⭐⭐ |
 | 140 | [How do you create CLI tools in Node.js?](#140-how-do-you-create-cli-tools-in-nodejs) | ⭐⭐⭐ |
 | 141 | [What is the purpose of shebang in Node.js scripts?](#141-what-is-the-purpose-of-shebang-in-nodejs-scripts) | ⭐ |
-| 142 | [How does Node.js support internationalization (i18n)?](#142-how-does-nodejs-support-internationalization-i18n) | ⭐ |
+| 142 | [What is REPL in Node.js?](#142-what-is-repl-in-nodejs) | ⭐⭐⭐ |
+| 143 | [What is EventEmitter in Node.js?](#143-what-is-eventemitter-in-nodejs) | ⭐⭐⭐ |
+| 144 | [What is the purpose of Buffer class in Node.js?](#144-what-is-the-purpose-of-buffer-class-in-nodejs) | ⭐⭐⭐ |
+| 145 | [How do you avoid callback hell in Node.js?](#145-how-do-you-avoid-callback-hell-in-nodejs) | ⭐⭐⭐ |
+| 146 | [Why should you separate Express app and server?](#146-why-should-you-separate-express-app-and-server) | ⭐⭐⭐⭐ |
+| 147 | [How does Node.js support internationalization (i18n)?](#147-how-does-nodejs-support-internationalization-i18n) | ⭐ |
 ---
 
 # 1. What is Node.js? Why is it used?
@@ -6623,7 +6628,295 @@ Allows scripts to run directly from terminal.
 
 ---
 
-# 142. How does Node.js support internationalization (i18n)?
+# 142. What is REPL in Node.js?
+
+## Answer
+
+REPL stands for:
+- Read
+- Eval
+- Print
+- Loop
+
+It is an interactive Node.js shell used to execute JavaScript code directly from the terminal.
+
+REPL is useful for:
+- Testing code
+- Debugging
+- Running quick JavaScript commands
+
+---
+
+## Start REPL
+
+```bash
+node
+```
+
+---
+
+## Example
+
+```bash
+> 2 + 3
+5
+
+> const name = "Ashish"
+
+> name
+'Ashish'
+```
+
+---
+
+## REPL Features
+
+- Execute JavaScript instantly
+- Supports multiline expressions
+- Useful for quick experiments
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 143. What is EventEmitter in Node.js?
+
+## Answer
+
+`EventEmitter` is a core Node.js class used to handle custom events.
+
+It follows the event-driven architecture used internally by Node.js.
+
+Common methods:
+- `on()` → Listen to event
+- `emit()` → Trigger event
+
+---
+
+## Example
+
+```js
+import EventEmitter from "events";
+
+const emitter = new EventEmitter();
+
+emitter.on("message", () => {
+
+  console.log("Message event triggered");
+
+});
+
+emitter.emit("message");
+```
+
+---
+
+## Use Cases
+
+- Notifications
+- Logging
+- Real-time systems
+- Custom events
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 144. What is the purpose of Buffer class in Node.js?
+
+## Answer
+
+`Buffer` is used to handle binary data directly in memory.
+
+Node.js uses buffers because JavaScript originally works only with strings and objects.
+
+Buffers are commonly used for:
+- File handling
+- Streams
+- Network data
+- Binary operations
+
+---
+
+## Example
+
+```js
+const buffer = Buffer.from("Hello");
+
+console.log(buffer);
+
+console.log(buffer.toString());
+```
+
+---
+
+## Output
+
+```bash
+<Buffer 48 65 6c 6c 6f>
+
+Hello
+```
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 145. How do you avoid callback hell in Node.js?
+
+## Answer
+
+Callback hell happens when multiple nested callbacks make code difficult to read and maintain.
+
+Ways to avoid callback hell:
+- Use Promises
+- Use async/await
+- Split logic into functions
+
+---
+
+## Callback Hell Example
+
+```js
+loginUser(user, () => {
+
+  getProfile(() => {
+
+    getPosts(() => {
+
+      console.log("Done");
+
+    });
+
+  });
+
+});
+```
+
+---
+
+## Better Using async/await
+
+```js
+async function getData() {
+
+  await loginUser();
+
+  await getProfile();
+
+  await getPosts();
+
+  console.log("Done");
+
+}
+```
+
+---
+
+## Benefits
+
+- Cleaner code
+- Better readability
+- Easier error handling
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 146. Why should you separate Express app and server?
+
+## Answer
+
+Separating the Express app and server improves:
+- Testability
+- Maintainability
+- Scalability
+
+The `app` contains:
+- Routes
+- Middlewares
+- Configurations
+
+The `server` handles:
+- Listening on ports
+- HTTP server setup
+
+This separation is useful for:
+- Unit testing
+- Integration testing
+- Socket.io integration
+
+---
+
+## Folder Structure
+
+```txt
+project/
+│
+├── app.js
+├── server.js
+└── routes/
+```
+
+---
+
+## app.js
+
+```js
+import express from "express";
+
+const app = express();
+
+app.get("/", (req, res) => {
+
+  res.send("Hello");
+
+});
+
+export default app;
+```
+
+---
+
+## server.js
+
+```js
+import app from "./app.js";
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+
+  console.log(
+    `Server running on port ${PORT}`
+  );
+
+});
+```
+
+---
+
+## Benefits
+
+- Easier API testing
+- Better project structure
+- Cleaner separation of concerns
+
+---
+
+[⬆ Back to Top](#-table-of-contents)
+
+---
+
+# 147. How does Node.js support internationalization (i18n)?
 
 ## Answer
 
