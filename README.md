@@ -6112,17 +6112,35 @@ retryApi(() => axios.get(url));
 
 ## Answer
 
-When a module is loaded using `require()`, Node.js caches it.
+When a module is loaded using `require()` or `import`, Node.js caches it.
 
-Future `require()` calls return the cached version instead of reloading the file.
+Future imports return the cached module instead of reloading the file again.
+
+This improves:
+- Performance
+- Memory usage
+- Execution speed
 
 ---
 
-## Example
+## CommonJS Example
 
 ```js
 const math1 = require("./math");
+
 const math2 = require("./math");
+
+console.log(math1 === math2);
+```
+
+---
+
+## ES Modules (ESM) Example
+
+```js
+import math1 from "./math.js";
+
+import math2 from "./math.js";
 
 console.log(math1 === math2);
 ```
@@ -6131,15 +6149,37 @@ console.log(math1 === math2);
 
 ## Output
 
-```txt
+```bash
 true
 ```
 
 ---
 
-## Benefit
+## Why Output is true?
 
-Improves performance and avoids duplicate execution.
+Node.js loads the module only once.
+
+After the first load:
+- Module gets cached
+- Same cached instance is reused
+
+---
+
+## Benefits
+
+- Faster execution
+- Avoids duplicate module loading
+- Better memory efficiency
+
+---
+
+## Important Note
+
+Module caching works for:
+- CommonJS (`require`)
+- ES Modules (`import`)
+
+But CommonJS and ES Modules maintain separate caches internally.
 
 ---
 
