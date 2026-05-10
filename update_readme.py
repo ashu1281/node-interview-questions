@@ -125,8 +125,20 @@ def update_question_headings(lines, questions):
 
             if re.match(pattern, line):
 
+                # extract only ⭐ count
+                star_match = re.search(r'⭐+', stars)
+
+                filled_stars = (
+                    star_match.group(0)
+                    if star_match
+                    else ""
+                )
+
+                # convert ⭐ -> ☆
+                outline_stars = filled_stars.replace("⭐", "☆")
+
                 updated_lines.append(
-                    f"# {number}. {question} {stars}"
+                    f"# {number}. {question} {outline_stars}"
                 )
 
                 updated = True
