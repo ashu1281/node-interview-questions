@@ -974,7 +974,7 @@ Node.js cluster module internally uses round-robin scheduling in most operating 
 
 ---
 
-# 11. Difference between CommonJS and ES Modules
+# 11. Difference between CommonJS and ES Modules ☆☆☆☆☆
 
 | Feature | CommonJS | ES Modules |
 |---|---|---|
@@ -1005,7 +1005,7 @@ import math from "./math.js";
 
 ---
 
-# 12. How do you create and export a custom module?
+# 12. How do you create and export a custom module? ☆☆☆☆
 
 ## math.js
 
@@ -1033,7 +1033,7 @@ console.log(add(2, 3));
 
 ---
 
-# 13. What is package.json and important fields?
+# 13. What is package.json and important fields? ☆☆☆☆☆
 
 ## Answer
 
@@ -1073,7 +1073,7 @@ console.log(add(2, 3));
 
 ---
 
-# 14. Difference between dependencies and devDependencies
+# 14. Difference between dependencies and devDependencies ☆☆☆☆☆
 
 | dependencies | devDependencies |
 |---|---|
@@ -1103,7 +1103,7 @@ npm install jest --save-dev
 
 ---
 
-# 15. How do you handle environment variables in Node.js?
+# 15. How do you handle environment variables in Node.js? ☆☆☆☆☆ 
 
 ## Answer
 
@@ -1149,7 +1149,7 @@ console.log(process.env.PORT);
 
 ---
 
-# 16. Difference between callbacks, promises, and async/await
+# 16. Difference between callbacks, promises, and async/await ☆☆☆☆☆
 
 | Type | Description |
 |---|---|
@@ -1192,7 +1192,7 @@ async function getData() {
 
 ---
 
-# 17. How do you handle errors in async functions?
+# 17. How do you handle errors in async functions? ☆☆☆☆☆
 
 ## Using try/catch
 
@@ -1227,7 +1227,7 @@ app.get("/", async (req, res, next) => {
 
 ---
 
-# 18. Difference between Promise.all() and Promise.race()
+# 18. Difference between Promise.all() and Promise.race() ☆☆☆☆☆
 
 ## Answer
 
@@ -1547,7 +1547,7 @@ AggregateError
 
 ---
 
-# 19. What happens if you forget await in an async function?
+# 19. What happens if you forget await in an async function? ☆☆☆☆
 
 ## Answer
 
@@ -1587,7 +1587,7 @@ const data = await fetch(url);
 
 ---
 
-# 20. Explain libuv in Node.js
+# 20. Explain libuv in Node.js ☆☆☆☆
 
 ## Answer
 
